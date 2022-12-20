@@ -23,3 +23,4 @@
 // void init_struct(stack *stack);
 // void iota(stack *stack, int leng_expression);
 char *dynamic_char_line(FILE *stdin);
+int validator(char *input_expression);
