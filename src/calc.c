@@ -9,7 +9,7 @@ int main() {
     char *input_expression = {0};
     // scanf("%s", input_expression);
     input_expression = read_full_line();
-    printf("%d", validator(input_expression));
+    printf("\n%d", validator(input_expression));
     // printf("%s", input_expression);
 
     free(input_expression);

@@ -7,10 +7,23 @@
 
 
 // typedef struct stack{
-//     char *top;
-//     unsigned capacity;
-//     int *array;
+//     double value;
+//     int priority;
+//     stack *next;
+//     type_t type;
 // } stack;
+
+typedef int T;
+typedef enum {number, x, plus, minus} TYPE;
+
+typedef struct stack {
+    T *data;
+    size_t top;
+    size_t size;
+    TYPE type;
+} stack;
+
+
 
 // typedef struct Stack_1 {
 //     double value;
