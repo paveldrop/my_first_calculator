@@ -13,15 +13,15 @@
 //     type_t type;
 // } stack;
 
-typedef int T;
-typedef enum {number, x, plus, minus} TYPE;
 
-typedef struct stack {
-    T *data;
-    size_t top;
-    size_t size;
-    TYPE type;
-} stack;
+// typedef enum {number, x, plus, minus} TYPE;
+
+// typedef struct stack {
+//     double value;  // число
+//     int priority;  // приоритет числа
+//     struct sNode *next; // следующая нода
+//     TYPE type; // тип лексемы
+// } stack;
 
 
 
@@ -37,3 +37,4 @@ typedef struct stack {
 // void iota(stack *stack, int leng_expression);
 char *dynamic_char_line(FILE *stdin);
 int validator(char *input_expression);
+void Lexem_Print(char *input_expression);
