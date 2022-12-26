@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stddef.h>
 
-typedef enum {number, x, plus, minus} TYPE;
+typedef enum {number = 0, x = 1, plus = 2, minus = 3} TYPE;
 
 typedef struct stack{
     double value;
@@ -37,3 +37,5 @@ typedef struct stack{
 // void iota(stack *stack, int leng_expression);
 char *dynamic_char_line(FILE *stdin);
 int validator(char *input_expression);
+void Lexem_Print(char *input_expression);
+stack *create(int value);

@@ -11,7 +11,7 @@ int main() {
     input_expression = read_full_line();
     printf("\n%d", validator(input_expression));
     // printf("%s", input_expression);
-
+    Lexem_Print(input_expression);
     free(input_expression);
     return 0;
 }
