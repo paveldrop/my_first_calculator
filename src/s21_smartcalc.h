@@ -4,24 +4,24 @@
 #include <stdlib.h>
 #include <stddef.h>
 
-
-
-// typedef struct stack{
-//     double value;
-//     int priority;
-//     stack *next;
-//     type_t type;
-// } stack;
-
-typedef int T;
 typedef enum {number, x, plus, minus} TYPE;
 
-typedef struct stack {
-    T *data;
-    size_t top;
-    size_t size;
+typedef struct stack{
+    double value;
+    int priority;
+    struct stack *next;
     TYPE type;
 } stack;
+
+// typedef int T;
+
+
+// typedef struct stack {
+//     T *data;
+//     size_t top;
+//     size_t size;
+//     TYPE type;
+// } stack;
 
 
 
