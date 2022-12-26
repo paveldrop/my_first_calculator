@@ -1,0 +1,3 @@
+# Hashes of file build rules.
+6707f09a9cd4f5f77baf868d8dcc76df /home/drop/School_21/smartcalc/src/calc/calc_en_US.ts
+d843f22d0493b0b60acb329782088018 CMakeFiles/calc_autogen
