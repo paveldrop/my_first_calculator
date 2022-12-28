@@ -18,4 +18,5 @@ typedef struct stack{
 char *dynamic_char_line(FILE *stdin);
 int validator(char *input_expression);
 void Lexem_Print(char *input_expression);
-stack *create(int value);
+stack *create(double value, int prior, TYPE type_value);
+void printList(stack *top);

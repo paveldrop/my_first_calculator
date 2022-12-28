@@ -12,6 +12,9 @@ int main() {
     printf("\n%d", validator(input_expression));
     // printf("%s", input_expression);
     Lexem_Print(input_expression);
+    stack *a = NULL;
+    a = create(2.58, 1, 2);
+    printList(a);
     free(input_expression);
     return 0;
 }
