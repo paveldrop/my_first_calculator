@@ -15,6 +15,7 @@ int main() {
     stack *a = NULL;
     a = create(2.58, 1, 2);
     printList(a);
+    deleteList(a);
     free(input_expression);
     return 0;
 }

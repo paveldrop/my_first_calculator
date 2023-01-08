@@ -51,6 +51,7 @@ stack *deleteList(stack *top) {
     }
 }
 
+
 // stack *add_element_input(double value, stack *head, int priority_value, TYPE type_value) {
 //     stack *add_elem = (stack*)malloc(sizeof(stack));
 //     add_elem->value = value;
@@ -62,32 +63,47 @@ stack *deleteList(stack *top) {
 
 // stack *last()
 
-void Lexem_Print(char *input_expression) {
-    // for (unsigned int i = 0; i < strlen(input_expression); i++) {
-        int i = 0;
-        size_t copy;
-        char *str;
-        char *ptr;
-        // char lexems[i];
+// void Lexem_Print(char *input_expression) {
+//     // for (unsigned int i = 0; i < strlen(input_expression); i++) {
+//         int i = 0;
+//         // size_t copy;
+//         // char *str;
+//         char *ptr;
+//         char lexems[3][20];
         
-        // ptr = strtok(input_expression, SYMBOLS);
-        str = input_expression;
-        // printf(ptr);
-        ptr = strtok(str, SYMBOLS);
-        // **str = (char) malloc(20 * sizeof(char*));
-        // printf(input_expression);
+//         // ptr = strtok(input_expression, SYMBOLS);
+//         // str = input_expression;
+//         // printf(ptr);
+//         ptr = strtok(input_expression, SYMBOLS);
+//         // **str = (char) malloc(20 * sizeof(char*));
+//         // printf(input_expression);
 
+//         while (ptr != NULL) {
+//             printf("\nPTR = %s", ptr);
+//             strcpy(lexems[i++], ptr);
+//             // printf("\nPTR with 0 = %s", lexems);
+//             ptr = strtok(NULL, SYMBOLS);
+//         }
+//         // printf("\nafter %s", lexems);
+//         free(ptr);
+//         // free(lexems);
+// }
+
+void Lexem_Print(char *input_expression) {
+        int i = 0;
+        char *ptr;
+        char **lexems = NULL;
+        lexems = (char **) malloc(sizeof(char*) * 3);
+        ptr = strtok(input_expression, SYMBOLS);
         while (ptr != NULL) {
-            
-            // strncpy(ptr, "\0", 1);
-            printf("\nPTR = %s", ptr);
-            // printf("%s", ptr);
-            strcat(ptr, "\0");
-            printf("\nPTR with 0 = %s", ptr);
-            strcat(str, ptr);
+            lexems[i] = (char*) malloc((strlen(ptr) + 1) * sizeof(char));
+            strcpy(lexems[i], ptr);
             ptr = strtok(NULL, SYMBOLS);
+            i++;
         }
-        printf("\nafter %s", str);
-        // free(ptr);
+        for (int j = 0; j < i; j++) {
+            printf("\nlexems[%d] = %s", j, lexems[j]);
+            free(lexems[j]);
+        }
+        free(lexems);
 }
-
