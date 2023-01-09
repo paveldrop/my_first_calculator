@@ -5,22 +5,6 @@
 
 #define SYMBOLS "+-*/"
 
-// stack* createStack() {
-//     stack out = NULL;
-//     out = malloc(sizeof(stack));
-//     if (out == NULL) {
-//         printf("Stack is empty");
-//     }
-//     out->size = 10;
-//     out->data = malloc(out->size * sizeof(double));
-//     if (out->data == NULL) {
-//         free(out);
-//         exit(-8);
-//     }
-//     out->top = 0;
-//     return out;
-// }
-
 stack *create(double value, int prior, TYPE type_value) {
     stack *pnt = (stack*)malloc(sizeof(stack));
     pnt->value = value;
@@ -46,9 +30,11 @@ stack *deleteList(stack *top) {
     if (top != NULL) {
         deleteList(top->next);
         free(top);
-    } else {
-        return NULL;
     }
+    // } else {
+    //     return NULL;
+    // }
+    return NULL;
 }
 
 
@@ -61,34 +47,6 @@ stack *deleteList(stack *top) {
 //     return(add_elem);
 // }
 
-// stack *last()
-
-// void Lexem_Print(char *input_expression) {
-//     // for (unsigned int i = 0; i < strlen(input_expression); i++) {
-//         int i = 0;
-//         // size_t copy;
-//         // char *str;
-//         char *ptr;
-//         char lexems[3][20];
-        
-//         // ptr = strtok(input_expression, SYMBOLS);
-//         // str = input_expression;
-//         // printf(ptr);
-//         ptr = strtok(input_expression, SYMBOLS);
-//         // **str = (char) malloc(20 * sizeof(char*));
-//         // printf(input_expression);
-
-//         while (ptr != NULL) {
-//             printf("\nPTR = %s", ptr);
-//             strcpy(lexems[i++], ptr);
-//             // printf("\nPTR with 0 = %s", lexems);
-//             ptr = strtok(NULL, SYMBOLS);
-//         }
-//         // printf("\nafter %s", lexems);
-//         free(ptr);
-//         // free(lexems);
-// }
-
 void Lexem_Print(char *input_expression) {
         int i = 0;
         char *ptr;
@@ -98,6 +56,7 @@ void Lexem_Print(char *input_expression) {
         while (ptr != NULL) {
             lexems[i] = (char*) malloc((strlen(ptr) + 1) * sizeof(char));
             strcpy(lexems[i], ptr);
+            parser(lexems[i]);
             ptr = strtok(NULL, SYMBOLS);
             i++;
         }
@@ -106,4 +65,20 @@ void Lexem_Print(char *input_expression) {
             free(lexems[j]);
         }
         free(lexems);
+}
+
+void parser(char *lexems) {
+    if (strncmp(lexems, "sin", 3)) {
+
+    } else if (strncmp(lexems, "cos", 3)) {
+
+    } else if (strncmp(lexems, "tg", 2)) {
+
+    } else if (strncmp(lexems, "aco", 3)) {
+
+    } else if (strncmp(lexems, "atg", 3)) {
+
+    } else if (strncmp(lexems, "asi", 3)) {
+        
+    }
 }

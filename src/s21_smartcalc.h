@@ -21,3 +21,4 @@ void Lexem_Print(char *input_expression);
 stack *create(double value, int prior, TYPE type_value);
 void printList(stack *top);
 stack *deleteList(stack *top);
+void parser(char *indef);
