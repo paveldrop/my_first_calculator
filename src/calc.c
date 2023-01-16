@@ -7,14 +7,16 @@
 int main() {
     char *input_expression = {0};
     input_expression = read_full_line();
+    stack *ready = NULL;
+    ready = create(0,0,0);
     validator(input_expression);
     // printf("\n%d", validator(input_expression));
     // printf("%s", input_expression);
-    parser(input_expression);
+    parser(input_expression, ready);
     printf("%s", input_expression);
     // Lexem_Print(input_expression);
-    // stack *a = NULL;
-    // a = create(2.58, 1, 2);
+    
+    
     // printList(a);
     // deleteList(a);
     free(input_expression);

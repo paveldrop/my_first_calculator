@@ -5,7 +5,7 @@
 #include <stddef.h>
 #include <ctype.h>
 
-typedef enum {number = 0, x = 1, plus = 2, minus = 3} TYPE;
+typedef enum {number = 0, x = 1, plus = 2, minus = 3, bracket = 4} TYPE;
 
 // pririty: 0 = number, 1 = +-, 2 = */mod, 3 = ^ or sqrt, 4 = sin cos....
 
@@ -24,4 +24,4 @@ void Lexem_Print(char *input_expression);
 stack *create(double value, int prior, TYPE type_value);
 void printList(stack *top);
 stack *deleteList(stack *top);
-void parser(char *indef);
+void parser(char *indef, stack *ready);
