@@ -1,5 +1,6 @@
 #include "s21_smartcalc.h"
 #include <stddef.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -38,14 +39,15 @@ stack *deleteList(stack *top) {
 }
 
 
-// stack *add_element_input(double value, stack *head, int priority_value, TYPE type_value) {
-//     stack *add_elem = (stack*)malloc(sizeof(stack));
-//     add_elem->value = value;
-//     add_elem->priority = priority_value;
-//     add_elem->next = head;
-//     add_elem->type = type_value;
-//     return(add_elem);
-// }
+stack *add_element_input(double value, stack *head, int priority_value, TYPE type_value) {
+    stack *add_elem = (stack*)malloc(sizeof(stack));
+    add_elem->value = value;
+    add_elem->priority = priority_value;
+    add_elem->next = head;
+    add_elem->type = type_value;
+    return add_elem;
+}
+
 
 void Lexem_Print(char *input_expression) {
         int i = 0;
@@ -67,18 +69,34 @@ void Lexem_Print(char *input_expression) {
         free(lexems);
 }
 
-void parser(char *lexems) {
-    if (strncmp(lexems, "sin", 3)) {
-
-    } else if (strncmp(lexems, "cos", 3)) {
-
-    } else if (strncmp(lexems, "tg", 2)) {
-
-    } else if (strncmp(lexems, "aco", 3)) {
-
-    } else if (strncmp(lexems, "atg", 3)) {
-
-    } else if (strncmp(lexems, "asi", 3)) {
-        
+void parser(char *input_expression) {
+    char *chislo;
+    char *p = input_expression;
+    // size_t len_expr_str;
+    // len_expr_str = strlen(input_expression);
+    // for (size_t i = 0; i < len_expr_str; i++) {
+    //     if (input_expression[i] >= '0' && input_expression[i] <= '9') {
+    //         if (input_expression[i + 1] == ',' || input_expression[i + 1] == '.') {
+    //             chislo[256][i]
+    //         }
+    //     }
+    // }
+    printf("ya zdes");
+    for (double f = strtod(p, &chislo); p != chislo; f = strtod(p, &chislo)) {
+        printf("'%.*s' -> ", (int)(chislo-p), p);//I can't understand this line
+        p = chislo;
+        printf("%f\n", f);
     }
+    // while (*p) {
+        // if (isdigit(*p) || *(p + 1) == '.') {
+            // double val = strtod(p, &chislo);
+            // printf("%f - is double val\n", val);
+            // printf("%c - is char chislo number\n", *chislo);
+            // printf("%c - is char ostatok (P)\n", *p);
+            // val = strtod(chislo, NULL);
+            // printf("%f - is double val\n", val);
+        // } else {
+        //     p++;
+        // }
+    // }
 }

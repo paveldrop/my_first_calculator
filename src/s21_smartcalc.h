@@ -3,8 +3,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include <ctype.h>
 
 typedef enum {number = 0, x = 1, plus = 2, minus = 3} TYPE;
+
+// pririty: 0 = number, 1 = +-, 2 = */mod, 3 = ^ or sqrt, 4 = sin cos....
 
 typedef struct stack{
     double value;
