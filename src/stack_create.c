@@ -108,41 +108,57 @@ void parser(char *input_expression, stack *head) {
     char *p = input_expression;
     size_t len_expr_str;
     len_expr_str = strlen(p);
-    pushback(99, 99, 99, head);
-    pushback(99, 99, 99, head);
+    // pushback(99, 99, 99, head);
+    // pushback(99, 99, 99, head);
     for (int i = 0; i < len_expr_str; i++) {
-        if (p[i] == 40 || p[i] == 41) {
-            printf("\n\nya zdes'!!!!!!!!!!!");
-            pushback(0, 5, 4, head);
-            // continue;
-        }
-        if (p[i] == 43) { // symbol "+
-            pushback(0, 1, 2, head);
-            printf("\n\nya zdes'!!!!!!!!!!!");
-            // continue;
-        }
-        if (p[i] == 45) {
-            pushback(0, 1, 3, head);
-            // continue;
-        }
-        if (p[i] == 42) {
-            pushback(0, 2, 5, head);
-            // continue;
-        }
-        if (p[i] == 47) {
-            pushback(0, 2, 6, head);
-            // continue;
-        }
+        printf("\n %d - проход\n", i);
         if ((p[i] >= '0' && p[i] <= '9')) {
             chislo = strtod((p + i), NULL);
             printf("\n double number - %f", chislo);
+            if (p[i-1] == 45 && p[i-2] == 40 ) {
+                pushback(chislo, 0, 3, head);
+            } else {
+                pushback(chislo, 0, 2, head);
+            }
             for (int j = 0; j < 256; j++) {
                 if ((p[i] >= '0' && p[i] <= '9') || p[i] == '.') {
                     i++;
                 } else {
+                    i -= 1;
                     break;
                 }
             }
+
+
+        if (p[i] == 40 || p[i] == 41) { // symbols "( and )"
+            printf("\n\nya zdes'!!!!!!!!!!!");
+            pushback(0, 5, 4, head);
+            // continue;
+        }
+        if (p[i] == 43) { // symbol "+""
+            pushback(0, 1, 2, head);
+            printf("\n\nya zdes'!!!!!!!!!!!");
+            // continue;
+        }
+        if (p[i] == 45) { // symbol "-"
+            if (i == 0 && isdigit(p[i+1])) {
+                break;
+            } else if(isdigit(p[i+1]) && p[i-1] == 40) {
+                break;
+            } else {
+                pushback(0, 1, 3, head);
+            }
+            // continue;
+        }
+        if (p[i] == 42) { // symbol "*"
+            pushback(0, 2, 5, head);
+            // continue;
+        }
+        if (p[i] == 47) { // symbol "/"
+            pushback(0, 2, 6, head);
+            // continue;
+        }
+        
                 // printf("\n nachalo str - %lu\n", i);
 
             // }
