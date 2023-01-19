@@ -6,56 +6,81 @@
 
 #define SYMBOLS "+-*/"
 
-stack *create(double value, int prior, TYPE type_value) {
-    stack *pnt = (stack*)malloc(sizeof(stack));
-    pnt->value = value;
-    pnt->priority = prior;
-    pnt->next = NULL;
-    pnt->type = type_value;
-    return(pnt);
+void push(double value, int prior, TYPE type_value, stack **head) {
+    stack *tmp = (stack*)malloc(sizeof(stack));
+    tmp->value = value;
+    tmp->priority = prior;
+    tmp->type = type_value;
+    tmp->next = *head;
+    *head = tmp;
 }
 
-void printList(stack *top) {
-    if (top != NULL) {
-        printf("\n%f = value", top->value);
-        printf(" %d = priority", top->priority);
-        printf(" %d = type -> ", top->type);
-        printList(top->next);
+void printList(stack *head) {
+    while(head != NULL) {
+        printf("\n%f = value", head->value);
+        printf("\n%d = priority", head->priority);
+        printf("\n%d = type - ↓\n\n", head->type);
+        head = head->next;
     }
-    else {
-        printf("NULL\n");
+    printf("\nNULL or stack is free\n");
+}
+
+
+void deleteList(stack **head) {
+    stack *prev = NULL;
+    while((*head)->next) {
+        prev = *head;
+        *head = (*head)->next;
+        free(prev);
+    }
+    free(*head);
+}
+
+
+void pushback(double value, int priority_value, TYPE type_value, stack *head) {
+    stack *last = getLast(head);
+    stack *tmp = (stack*) malloc(sizeof(stack));
+    tmp->value = value;
+    tmp->priority = priority_value;
+    tmp->type = type_value;
+    tmp->next = NULL;
+    last->next = tmp;
+}
+
+stack *getLast(stack *head) {
+    if (head == NULL) {
+        return NULL;
+    }
+    while (head->next) {
+        head = head->next;
+    }
+    return head;
+}
+
+int popBack(stack **head) {
+    stack *pFwd = NULL;  //текущий узел
+    stack *pBwd = NULL;  //предыдущий узел
+    //Получили NULL
+    if (!head) {
+        exit(-1);
+    }
+    //Список пуст
+    if (!(*head)) {
+        exit(-1);
+    }
+    pFwd = *head; 
+    while (pFwd->next) { 
+        pBwd = pFwd;
+        pFwd = pFwd->next;
+    }
+    if (pBwd == NULL) {
+        free(*head);
+        *head = NULL;
+    } else {
+        free(pFwd->next);
+        pBwd->next = NULL;
     }
 }
-
-stack *deleteList(stack *top) {
-    if (top != NULL) {
-        deleteList(top->next);
-        free(top);
-    }
-    // } else {
-    //     return NULL;
-    // }
-    return NULL;
-}
-
-
-stack *add_element_input(double value, stack *head, int priority_value, TYPE type_value) {
-    stack *add_elem = (stack*)malloc(sizeof(stack));
-    add_elem->value = value;
-    add_elem->priority = priority_value;
-    add_elem->next = NULL;
-    add_elem->type = type_value;
-    last->next = add_elem;
-    return add_elem;
-}
-
-// void pushBack(struct *head, double value, int priority_value, TYPE type_value) {
-//     struct *head = getLast(head);
-//     Node *tmp = (Node*) malloc(sizeof(Node));
-//     tmp->value = value;
-//     tmp->next = NULL;
-//     last->next = tmp;
-// }
 
 
 // void Lexem_Print(char *input_expression) {
@@ -78,39 +103,38 @@ stack *add_element_input(double value, stack *head, int priority_value, TYPE typ
 //         free(lexems);
 // }
 
-void parser(char *input_expression, stack *ready) {
+void parser(char *input_expression, stack *head) {
     double chislo;
     char *p = input_expression;
     size_t len_expr_str;
     len_expr_str = strlen(p);
-    for (size_t i = 0; i < len_expr_str; i++) {
-        if (p[i] == '(' || p[i] == ')') {
-            add_element_input(0, ready, 5, 4);
-            continue;
+    pushback(99, 99, 99, head);
+    pushback(99, 99, 99, head);
+    for (int i = 0; i < len_expr_str; i++) {
+        if (p[i] == 40 || p[i] == 41) {
+            printf("\n\nya zdes'!!!!!!!!!!!");
+            pushback(0, 5, 4, head);
+            // continue;
         }
-        if (p[i] == '+') {
-            add_element_input(0, ready, 1, 2);
-            continue;
+        if (p[i] == 43) { // symbol "+
+            pushback(0, 1, 2, head);
+            printf("\n\nya zdes'!!!!!!!!!!!");
+            // continue;
         }
-        if (p[i] == '-') {
-            add_element_input(0, ready, 1, 3);
-            continue;
+        if (p[i] == 45) {
+            pushback(0, 1, 3, head);
+            // continue;
         }
-        if (p[i] == '*') {
-            add_element_input(0, ready, 2, 5);
-            continue;
+        if (p[i] == 42) {
+            pushback(0, 2, 5, head);
+            // continue;
         }
-        if (p[i] == '/') {
-            add_element_input(0, ready, 2, 6);
-            continue;
+        if (p[i] == 47) {
+            pushback(0, 2, 6, head);
+            // continue;
         }
-
         if ((p[i] >= '0' && p[i] <= '9')) {
-            // printf("\n isdigit - %c", p[i]);
-            // printf("\n reminder - %s", p+i);
-            // while (isdigit(p[i]) || p[i] == '.') {
             chislo = strtod((p + i), NULL);
-            // i += sizeof(chislo);
             printf("\n double number - %f", chislo);
             for (int j = 0; j < 256; j++) {
                 if ((p[i] >= '0' && p[i] <= '9') || p[i] == '.') {

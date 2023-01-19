@@ -8,17 +8,16 @@ int main() {
     char *input_expression = {0};
     input_expression = read_full_line();
     stack *input = NULL;
-    input = create(0,0,0);
-    validator(input_expression);
-    // printf("\n%d", validator(input_expression));
-    // printf("%s", input_expression);
-    parser(input_expression, input);
-    printf("%s", input_expression);
-    // Lexem_Print(input_expression);
-    
-    
+    push(0, 0, 0, &input);
+    printf("\nprint 0 Node\n");
     printList(input);
-    deleteList(input);
+    printf("\nprint 0 Node\n");
+    validator(input_expression);
+    parser(input_expression, input);
+    printf("\n%s\n", input_expression);
+    // pushback(5, 0, 1, input);
+    printList(input);
+    deleteList(&input);
     free(input_expression);
     return 0;
 }

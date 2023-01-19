@@ -12,16 +12,21 @@ typedef enum {number = 0, x = 1, plus = 2, minus = 3, bracket = 4, add = 5, sub 
 typedef struct stack{
     double value;
     int priority;
-    struct stack *next;
     TYPE type;
+    struct stack *next;
 } stack;
 
-// void init_struct(stack *stack);
-// void iota(stack *stack, int leng_expression);
+
 char *dynamic_char_line(FILE *stdin);
 int validator(char *input_expression);
-void Lexem_Print(char *input_expression);
-stack *create(double value, int prior, TYPE type_value);
-void printList(stack *top);
-stack *deleteList(stack *top);
-void parser(char *indef, stack *ready);
+void parser(char *indef, stack *head);
+
+
+/*WORK WITH STACK LINKED LIST*/
+
+stack *getLast(stack *head);
+void push(double value, int prior, TYPE type_value, stack **head);
+void pushback(double value, int priority_value, TYPE type_value, stack *head);
+int popBack(stack **head);
+void printList(stack *head);
+void deleteList(stack **head);
