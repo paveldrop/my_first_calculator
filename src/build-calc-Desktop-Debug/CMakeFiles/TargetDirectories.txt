@@ -1,0 +1,8 @@
+/home/drop/School_21/smartcalc/src/build-calc-Desktop-Debug/CMakeFiles/calc.dir
+/home/drop/School_21/smartcalc/src/build-calc-Desktop-Debug/CMakeFiles/edit_cache.dir
+/home/drop/School_21/smartcalc/src/build-calc-Desktop-Debug/CMakeFiles/rebuild_cache.dir
+/home/drop/School_21/smartcalc/src/build-calc-Desktop-Debug/CMakeFiles/list_install_components.dir
+/home/drop/School_21/smartcalc/src/build-calc-Desktop-Debug/CMakeFiles/install.dir
+/home/drop/School_21/smartcalc/src/build-calc-Desktop-Debug/CMakeFiles/install/local.dir
+/home/drop/School_21/smartcalc/src/build-calc-Desktop-Debug/CMakeFiles/install/strip.dir
+/home/drop/School_21/smartcalc/src/build-calc-Desktop-Debug/CMakeFiles/calc_autogen.dir

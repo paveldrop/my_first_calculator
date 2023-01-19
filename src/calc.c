@@ -1,17 +1,24 @@
 #include "s21_smartcalc.h"
-#include <stdio.h>
-#include <stdlib.h>
+
 
 #define read_full_line() ( dynamic_char_line(stdin) )
 
 
 int main() {
     char *input_expression = {0};
-    // scanf("%s", input_expression);
     input_expression = read_full_line();
-    printf("\n%d", validator(input_expression));
+    stack *input = NULL;
+    input = create(0,0,0);
+    validator(input_expression);
+    // printf("\n%d", validator(input_expression));
     // printf("%s", input_expression);
-    Lexem_Print(input_expression);
+    parser(input_expression, input);
+    printf("%s", input_expression);
+    // Lexem_Print(input_expression);
+    
+    
+    printList(input);
+    deleteList(input);
     free(input_expression);
     return 0;
 }
