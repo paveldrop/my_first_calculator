@@ -20,6 +20,7 @@ typedef struct stack{
 char *dynamic_char_line(FILE *stdin);
 int validator(char *input_expression);
 void parser(char *indef, stack *head);
+int index_cursor(int index, char *input_expression);
 
 
 /*WORK WITH STACK LINKED LIST*/
