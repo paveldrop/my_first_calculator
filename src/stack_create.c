@@ -123,7 +123,8 @@ void parser(char *input_expression, stack *head) {
             } else {
                 pushback(chislo, 0, 2, head);
             }
-            index_cursor(i, input_expression);
+            i = index_cursor(i, input_expression);
+            printf("\n\nya zdes'!!!!!!!!!!!%d!!!!!", i);
             // for (int j = 0; j < 256; j++) {
             //     if ((p[i] >= '0' && p[i] <= '9') || p[i] == '.') {
             //         i++;
@@ -160,13 +161,13 @@ void parser(char *input_expression, stack *head) {
             pushback(0, 2, 6, head);
             // continue;
         }
-        printf("\n\nya zdes'!!!!!!!!!!!%d!!!!!", strncmp(&p[i], "sin(", 2));
+        // printf("\n\nya zdes'!!!!!!!!!!!%d!!!!!", strncmp(&p[i], "sin(", 2));
         if (strncmp(&p[i], "sin(", 2) == 0) {
-            chislo_sin = strtod((p + i), NULL);
+            chislo_sin = strtod(p + (i + 4), NULL);
             
             pushback(chislo_sin, 4, 0, head);
-            index_cursor(i + 1, input_expression);
-            printf("\n\nya zdes' SIN!!!!!!!!!!!%d", i);
+            i = index_cursor(i, input_expression);
+            printf("\n\nposle sin SIN index!!!!!!!!!!!%d", i);
         }
         
                 // printf("\n nachalo str - %lu\n", i);
@@ -184,10 +185,11 @@ void parser(char *input_expression, stack *head) {
 
 int index_cursor(int index, char *input_expression) { // проверка если следующий символ не является цифрой или закрытием скобки?????
     for (int j = 0; j < 256; j++) {
-                if ((isdigit(input_expression[index])) || input_expression[index] == '.' ) {
+                if (isdigit(input_expression[index]) || input_expression[index] == '.' || 
+                    (input_expression[index] >= 'a' && input_expression[index] <= 'z') ||
+                    input_expression[index] == '(' || input_expression[index] == ')') {
                     index++;
                 } else {
-                    index -= 1;
                     break;
                 }
             }
