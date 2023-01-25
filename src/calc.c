@@ -8,9 +8,11 @@ int main() {
     char *input_expression = {0};
     input_expression = read_full_line();
     stack *input = NULL;
-    // stack *ready = NULL;
-    // stack *support = NULL;
+    stack *ready = NULL;
+    stack *support = NULL;
     push(0, 0, 0, &input);
+    push(0, 0, 0, & support);
+    push(0, 0, 0, & ready);
     printf("\nprint 0 Node\n");
     // printList(input);
     printf("\nprint 0 Node\n");

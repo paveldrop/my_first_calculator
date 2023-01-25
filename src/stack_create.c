@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define SYMBOLS "+-*/"
 
 void push(double value, int prior, TYPE type_value, stack **head) {
     stack *tmp = (stack*)malloc(sizeof(stack));
@@ -142,7 +141,20 @@ int popBack(stack **head) {
     }
     return 0;
 }
-
+int search_pos_elem(stack *head) {
+    stack *current = NULL;
+    int count = 0;
+    
+    if (head == NULL) {
+      count = -1; // error if node not init
+    }
+    current = head;
+    while(current != NULL) {
+        count++;
+        current = current->next;
+    }
+    return count;
+}
  
 double peek(stack *head, int pos){
     // struct Node* ptr = top;
