@@ -1,23 +1,27 @@
-SOURCE = 
+SOURCE = *.c
 OBJ = *.o
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 GCOVFLAGS = -lcheck -lgcov -coverage
 
-all: clean s21_matrix.a test gcov_report
+all: clean calc
 
-install:
+calc:
+	gcc $(CFLAGS) $(SOURCE) -o calc
+	./calc
 
-uninstall:
+# install:
+
+# uninstall:
 
 clean:
-	# rm -rf *.o ./test ./s21_matrix.a ./*.gc* ./report*
+	rm -rf *.o  ./calc 
 
-dvi:
+# dvi:
 
-dist:
+# dist:
 
-tests: install
+# tests: install
 
 gcov_report: tests
 	gcovr .

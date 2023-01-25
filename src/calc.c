@@ -8,16 +8,26 @@ int main() {
     char *input_expression = {0};
     input_expression = read_full_line();
     stack *input = NULL;
+    // stack *ready = NULL;
+    // stack *support = NULL;
     push(0, 0, 0, &input);
     printf("\nprint 0 Node\n");
-    printList(input);
+    // printList(input);
     printf("\nprint 0 Node\n");
     validator(input_expression);
     parser(input_expression, input);
-    printf("\n%s\n", input_expression);
-    // pushback(5, 0, 1, input);
     printList(input);
-    deleteList(&input);
+    reverse(&input);
+    // push(0, 0, 0,  &input);
+    // pushback(0, 0, 0,  input);
+    printf("\n%s\n", input_expression);
+
+    printf("\n AFTER REVERSE");
+    printf("\n popBack %d, %f, %f - value", popBack(&input), pop(&input), peek(input, 0));
+
+    printList(input);
+    
+    deleteList(input);
     free(input_expression);
     return 0;
 }
