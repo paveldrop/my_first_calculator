@@ -83,14 +83,22 @@ stack *deleteList(stack *head) {
 //     curr.tail = item        # Update tail
 //     }
 
-void pushback(double value, int priority_value, TYPE type_value, stack *head) {
-        stack *last = getLast(head);
-        stack *tmp = (stack*) malloc(sizeof(stack));
-        tmp->value = value;
-        tmp->priority = priority_value;
-        tmp->type = type_value;
-        tmp->next = NULL;
-        last->next = tmp;
+void pushback(double value, int priority_value, TYPE type_value, stack **head) {
+        stack *last = (stack*) malloc(sizeof(stack));
+        if (getLast(*head) == NULL) {
+            last->value = value;
+            last->priority = priority_value;
+            last->type = type_value;
+            last->next = NULL;
+            *head = last;
+        } else {
+            stack *tmp = (stack*) malloc(sizeof(stack));
+            tmp->value = value;
+            tmp->priority = priority_value;
+            tmp->type = type_value;
+            tmp->next = NULL;
+            last->next = tmp;
+        }
 }
 
 stack *getLast(stack *head) {
@@ -116,7 +124,7 @@ double pop(stack **head) {
     return val;
 }
 
-int popBack(stack **head) {
+void popBack(stack **head) {
     stack *current = NULL;  //текущий узел
     stack *prev = NULL;  //предыдущий узел
     //Получили NULL
@@ -139,8 +147,8 @@ int popBack(stack **head) {
         free(current->next);
         prev->next = NULL;
     }
-    return 0;
 }
+
 int search_pos_elem(stack *head) {
     stack *current = NULL;
     int count = 0;
@@ -156,17 +164,29 @@ int search_pos_elem(stack *head) {
     return count;
 }
  
-double peek(stack *head, int pos){
+stack *peek(stack *head, int pos){
     // struct Node* ptr = top;
     for (int i = 0; (i < pos-1 && head!=NULL); i++)
     {
         head = head->next;
     }
     if(head!=NULL){
-        return head->value;
+        return head;
     } else {
-        return -1;
+        return NULL;
     }
+}
+
+stack *LastElem(stack *head) {
+    stack *current = NULL;
+    current = head;
+    if (current == NULL) {
+        return NULL;
+    }
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    return current;
 }
 
 void create_Node(double value, int priority_value, TYPE type_value, stack **head) {

@@ -22,10 +22,11 @@ int main() {
     reverse(&input);
     // push(0, 0, 0,  &input);
     // pushback(0, 0, 0,  input);
+    rpn(input);
     printf("\n%s\n", input_expression);
 
     printf("\n AFTER REVERSE");
-    printf("\n popBack %d, %f, %f - value", popBack(&input), pop(&input), peek(input, 0));
+    printf("\n popBack, %f", pop(&input));
 
     printList(input);
     

@@ -18,7 +18,7 @@ void parser(char *input_expression, stack *head) {
             // } else if (i-1 == 0 && p[i-1] == 45) {
             //     pushback(chislo, 0, 3, head);
             // } else {
-                pushback(chislo, 0, 2, head);
+                pushback(chislo, 0, 2, &head);
             // }
             i = index_cursor(i, input_expression);
             printf("\n\nya zdes'!!!!!!!!!!!%d!!!!!", i);
@@ -33,11 +33,11 @@ void parser(char *input_expression, stack *head) {
         }
         if (p[i] == 40 || p[i] == 41) { // symbols "( and )"
             printf("\n\nya zdes'!!!!!!!!!!!");
-            pushback(0, 5, 4, head);
+            pushback(0, 5, 4, &head);
             // continue;
         }
         if (p[i] == 43) { // symbol "+""
-            pushback(0, 1, 2, head);
+            pushback(0, 1, 2, &head);
             printf("\n\nya zdes'!!!!!!!!!!!");
         }
         if (p[i] == 45) { // symbol "-"
@@ -46,16 +46,16 @@ void parser(char *input_expression, stack *head) {
             } else if(isdigit(p[i+1]) && p[i-1] == 40) { // "(-a...."
                 continue;
             } else {
-                pushback(0, 1, 3, head);
+                pushback(0, 1, 3, &head);
             }
             // continue;
         }
         if (p[i] == 42) { // symbol "*"
-            pushback(0, 2, 5, head);
+            pushback(0, 2, 5, &head);
             // continue;
         }
         if (p[i] == 47) { // symbol "/"
-            pushback(0, 2, 6, head);
+            pushback(0, 2, 6, &head);
             // continue;
         }
         // printf("\n\nya zdes'!!!!!!!!!!!%d!!!!!", strncmp(&p[i], "sin(", 2));

@@ -27,12 +27,14 @@ int index_cursor(int index, char *input_expression);
 
 stack *getLast(stack *head);
 void push(double value, int prior, TYPE type_value, stack **head);
-void pushback(double value, int priority_value, TYPE type_value, stack *head);
-int popBack(stack **head);
+void pushback(double value, int priority_value, TYPE type_value, stack **head);
+void popBack(stack **head);
 void printList(stack *head);
 // void deleteList(stack **head);
 stack *deleteList(stack *head);
 void create_Node(double value, int priority_value, TYPE type_value, stack **head);
 void reverse(stack **head);
 double pop(stack **head);
-double peek(stack *head, int pos);
+stack *peek(stack *head, int pos);
+int search_pos_elem(stack *head);
+void rpn(stack *head);
