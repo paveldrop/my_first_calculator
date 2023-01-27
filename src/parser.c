@@ -10,23 +10,16 @@ void parser(char *input_expression, stack **head) {
         if ((p[i] >= '0' && p[i] <= '9') || p[i+1] == '.') {
             chislo = strtod((p + i), NULL);
             printf("\n double number - %f", chislo);
-            // if (p[i-1] == 45 && p[i-2] == 40 ) {
-            //     pushback(chislo, 0, 3, head);
+            if (i >= 2 && p[i-1] == 45 && p[i-2] == 40 ) {
+                chislo *= -1;
+                pushback(chislo, 0, 0, head);
             // } else if (i-1 == 0 && p[i-1] == 45) {
             //     pushback(chislo, 0, 3, head);
-            // } else {
+            } else {
                 pushback(chislo, 0, 0, head);
             // }
             i = index_cursor(i, input_expression);
             printf("\n\nya zdes'!!!!!!!!!!!%d!!!!!", i);
-            // for (int j = 0; j < 256; j++) {
-            //     if ((p[i] >= '0' && p[i] <= '9') || p[i] == '.') {
-            //         i++;
-            //     } else {
-            //         i -= 1;
-            //         break;
-            //     }
-            // }
         }
         if (p[i] == 40 || p[i] == 41) { // symbols "( and )"
             printf("\n\nya zdes'!!!!!!!!!!!");
@@ -118,7 +111,7 @@ void parser(char *input_expression, stack **head) {
         //     pushback(chislo, 4, 0, head);
         //     i = index_cursor(i, input_expression);
         //     printf("\n\nposle sin ACOS index!!!!!!!!!!!%d", i);
-        // }
+        }
     }
 }
 

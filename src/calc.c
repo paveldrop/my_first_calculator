@@ -10,7 +10,7 @@ int main() {
     stack *input = NULL;
     validator(input_expression);
     parser(input_expression, &input);
-    printList(input);
+    // printList(input);
     reverse(&input);
     rpn(input);
     printList(input);
