@@ -8,29 +8,30 @@ int main() {
     char *input_expression = {0};
     input_expression = read_full_line();
     stack *input = NULL;
-    stack *ready = NULL;
-    stack *support = NULL;
-    push(0, 0, 0, &input);
-    push(0, 0, 0, & support);
-    push(0, 0, 0, & ready);
-    printf("\nprint 0 Node\n");
-    // printList(input);
-    printf("\nprint 0 Node\n");
+    // stack *ready = NULL;
+    // stack *support = NULL;
+    push(0, 0, 0, &input); // Как это избежать?
+    // push(0, 0, 0, &support);
+    // push(0, 0, 0, &ready);
+    // printf("\nprint 0 Node\n");
+    printList(input);
+    // printf("\nprint 0 Node\n");
     validator(input_expression);
     parser(input_expression, input);
     printList(input);
-    reverse(&input);
-    // push(0, 0, 0,  &input);
-    // pushback(0, 0, 0,  input);
+    // reverse(&input);
+    // // push(0, 0, 0,  &input);
+    // // pushback(0, 0, 0,  input);
     rpn(input);
-    printf("\n%s\n", input_expression);
+    // printf("\n%s\n", input_expression);
 
-    printf("\n AFTER REVERSE");
-    printf("\n popBack, %f", pop(&input));
+    // printf("\n AFTER REVERSE");
+    // // printf("\n popBack, %f", pop(&input));
 
     printList(input);
     
-    deleteList(input);
+    deleteList(&input);
+
     free(input_expression);
     return 0;
 }

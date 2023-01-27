@@ -18,7 +18,7 @@ void parser(char *input_expression, stack *head) {
             // } else if (i-1 == 0 && p[i-1] == 45) {
             //     pushback(chislo, 0, 3, head);
             // } else {
-                pushback(chislo, 0, 2, &head);
+                pushback(chislo, 0, 0, &head);
             // }
             i = index_cursor(i, input_expression);
             printf("\n\nya zdes'!!!!!!!!!!!%d!!!!!", i);

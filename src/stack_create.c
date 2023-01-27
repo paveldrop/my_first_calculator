@@ -6,6 +6,7 @@
 
 
 void push(double value, int prior, TYPE type_value, stack **head) {
+    
     stack *tmp = (stack*)malloc(sizeof(stack));
     tmp->value = value;
     tmp->priority = prior;
@@ -34,7 +35,7 @@ void reverse(stack **head) {
 void printList(stack *head) {
     printf("\n");
     while(head != NULL) {
-        printf("%f = value| %d = priority| %d = type ->", head->value, head->priority, head->type);
+        printf("%f = value| %d = priority| %d = type ->__", head->value, head->priority, head->type);
         // printList(head->next);
         head = head->next;
     }
@@ -52,52 +53,42 @@ void printList(stack *head) {
 //     free(*head);
 // }
 
-stack *deleteList(stack *head) {
-    while (head != 0) {
-        stack *p = head;
-        head = head-> next;
-        free(p);
+// stack *deleteList(stack *head) {
+//     while (head != 0) {
+//         stack *p = head;
+//         head = head-> next;
+//         free(p);
+//     }
+//     free(head);
+//     return NULL;
+// }
+
+void deleteList(stack **head) {
+    if (head != NULL) {
+        stack *prev = NULL;
+        while ((*head)->next) {
+            prev = *head;
+            *head = (*head)->next;
+            free(prev);
+        }
+    free(*head);
+    } else {
+        printf("\nStrack is EMPTY\n");
     }
-    free(head);
-    return NULL;
 }
 
-// void push_back(double value, int priority_value, TYPE type_value, stack *head) {
-//     // # Force tail constraints, new tail must be end of list.
-//     value->next = 0;
-//     // item.next = null
-//     priority_value->next = 0;
-//     type_value->next = 0;
-
-//     //# If list empty, simply set head/tail.
-
-//     if (stack *head == NULL) {
-//         list.head = item
-//         list.tail = item
-//         return
-//     }
-
-//     # In non-empty list, tail will always be last element.
-
-//     curr.tail.next = item   # Point current tail to new tail.
-//     curr.tail = item        # Update tail
-//     }
 
 void pushback(double value, int priority_value, TYPE type_value, stack **head) {
-        stack *last = (stack*) malloc(sizeof(stack));
-        if (getLast(*head) == NULL) {
-            last->value = value;
-            last->priority = priority_value;
-            last->type = type_value;
-            last->next = NULL;
-            *head = last;
-        } else {
+        if (*head != NULL) {
+            stack *last = getLast(*head);
             stack *tmp = (stack*) malloc(sizeof(stack));
             tmp->value = value;
             tmp->priority = priority_value;
             tmp->type = type_value;
             tmp->next = NULL;
             last->next = tmp;
+        } else {
+            push(value, priority_value, type_value, head);
         }
 }
 
