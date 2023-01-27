@@ -1,6 +1,0 @@
-#include "s21_smartcalc.h"
-
-
-void rpn(stack *head) {
-  
-}
