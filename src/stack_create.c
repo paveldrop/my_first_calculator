@@ -115,29 +115,55 @@ double pop(stack **head) {
     return val;
 }
 
-void popBack(stack **head) {
-    stack *current = NULL;  //текущий узел
-    stack *prev = NULL;  //предыдущий узел
-    //Получили NULL
-    if (!head) {
-        exit(-1);
+// void popBack(stack **head) {
+//     stack *current = NULL;  //текущий узел
+//     stack *prev = NULL;  //предыдущий узел
+//     //Получили NULL
+//     if (!head) {
+//         exit(-1);
+//     }
+//     //Список пуст
+//     if (!(*head)) {
+//         exit(-1);
+//     }
+//     current = *head; 
+//     while (current->next) { 
+//         prev = current;
+//         current = current->next;
+//     }
+//     if (prev == NULL) {
+//         free(*head);
+//         *head = NULL;
+//     } else {
+//         free(current->next);
+//         prev->next = NULL;
+//     }
+// }
+
+void popBack(stack** head){
+    stack *temp = *head;
+    stack * previous;
+
+    if (*head == NULL){
+        printf("Linked List Empty, nothing to delete");
+        return;
     }
-    //Список пуст
-    if (!(*head)) {
-        exit(-1);
-    }
-    current = *head; 
-    while (current->next) { 
-        prev = current;
-        current = current->next;
-    }
-    if (prev == NULL) {
-        free(*head);
+
+    if (temp->next == NULL){
+        printf("%f deleted\n",(*head)->value);
         *head = NULL;
-    } else {
-        free(current->next);
-        prev->next = NULL;
+        return;
     }
+    while (temp->next != NULL) 
+    {
+        previous = temp; 
+        temp = temp->next; 
+    }
+
+    previous->next = NULL;
+
+    printf("%f deleted\n", temp->value);
+    free(temp);
 }
 
 int search_pos_elem(stack *head) {
@@ -157,14 +183,23 @@ int search_pos_elem(stack *head) {
  
 stack *peek(stack *head, int pos){
     // struct Node* ptr = top;
-    for (int i = 0; (i < pos-1 && head!=NULL); i++)
-    {
+    int counter = 0;
+    while (counter < pos && head) {
         head = head->next;
+        counter++;
     }
-    if(head!=NULL){
+    if (head != NULL) {
         return head;
     } else {
         return NULL;
+    }
+}
+
+int peek_type(stack *head){
+    if(head != NULL){
+        return head->type;
+    } else {
+        return -999; // обработка ошибок
     }
 }
 

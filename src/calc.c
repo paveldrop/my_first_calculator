@@ -19,7 +19,7 @@ int main() {
     validator(input_expression);
     parser(input_expression, input);
     printList(input);
-    // reverse(&input);
+    reverse(&input);
     // // push(0, 0, 0,  &input);
     // // pushback(0, 0, 0,  input);
     rpn(input);
