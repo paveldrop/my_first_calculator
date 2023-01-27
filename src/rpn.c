@@ -18,7 +18,8 @@ void rpn(stack *head) {
     if (p->type == 0) {
         pushback(p->value, p->priority, p->type, &ready);
         // popBack(&p);
-    } else {
+    }
+    if (p->type != 0) {
         pushback(p->value, p->priority, p->type, &support);
         // popBack(&p);
     }
