@@ -226,7 +226,7 @@ void create_Node(double value, int priority_value, TYPE type_value, stack **head
     *head = temp;
 }
 
-int search_type_elem(TYPE x, stack *head) {
+int search_type_elem(TYPE type, stack *head) {
     stack *current = NULL;
     current = head;
     int count = 0;
@@ -237,8 +237,8 @@ int search_type_elem(TYPE x, stack *head) {
     // if (head == NULL) {
     //     exit(-1);
     // }
-    while (current->next != NULL || flag == 1) {
-        if (current->type == x) {
+    while (current->next != NULL || flag != 1) {
+        if (current->type == type) {
             flag = 1;
         }
         current = current->next;

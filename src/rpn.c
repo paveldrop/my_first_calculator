@@ -24,8 +24,8 @@ void rpn(stack *head) {
         // popBack(&p);
     }
     if (p->type == 17) {
-        length_ready = search_pos_elem(support) - search_type_elem(4, support);
-        printf("zdes' error %d", length_ready);
+        length_ready = search_pos_elem(support) - search_type_elem(bracket_open, support) + 1;
+        printf("zdes' error %d kolichestvo elements %d, zdes' bracket %d\n", length_ready, search_pos_elem(support),search_type_elem(bracket_open, support));
         if (length_ready == 1) {
           popBack(&support);
         } else {
