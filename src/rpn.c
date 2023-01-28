@@ -28,11 +28,13 @@ void rpn(stack *head) {
         printf("zdes' error %d", length_ready);
         if (length_ready == 1) {
           popBack(&support);
+        } else {
+          for (int j = 0; j < length_ready; j++) {
+            pushback(support->value, support->priority, support->type, &ready);
+            popBack(&support);
+          }
         }
-        // for (int j = 0; j < length_ready; j++) {
-        //   pushback(support->value, support->priority, support->type, &ready);
-        // }
-    }
+      }
     }
   
   printf("\n\n\n_________________________READY______________________");

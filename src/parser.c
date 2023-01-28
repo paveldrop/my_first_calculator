@@ -25,7 +25,7 @@ void parser(char *input_expression, stack **head) {
         if (p[i] == 40) { // symbols "( and )"
             printf("\n\nya BRACKET(((('!!!!!!!!!!!");
             pushback(0, 5, 4, head);
-            continue;
+            // continue;
         }
         if (p[i] == 41) {
             pushback(0, 5, 17, head);
