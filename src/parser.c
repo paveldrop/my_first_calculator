@@ -22,10 +22,14 @@ void parser(char *input_expression, stack **head) {
             printf("\n\nya zdes'!!!!!!!!!!!%d!!!!!", i);
             }
         }
-        if (p[i] == 40 || p[i] == 41) { // symbols "( and )"
-            printf("\n\nya BRACKET'!!!!!!!!!!!");
+        if (p[i] == 40) { // symbols "( and )"
+            printf("\n\nya BRACKET(((('!!!!!!!!!!!");
             pushback(0, 5, 4, head);
             continue;
+        }
+        if (p[i] == 41) {
+            pushback(0, 5, 17, head);
+            printf("\n\nya BRACKET)))))'!!!!!!!!!!!");
         }
         if (p[i] == 43) { // symbol "+""
             pushback(0, 1, 2, head);

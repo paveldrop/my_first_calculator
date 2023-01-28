@@ -196,13 +196,13 @@ stack *peek(stack *head, int pos){
     }
 }
 
-int peek_type(stack *head){
-    if(head != NULL){
-        return head->type;
-    } else {
-        return -999; // обработка ошибок
-    }
-}
+// int peek_type(stack *head){
+//     if(head != NULL){
+//         return head->type;
+//     } else {
+//         return -999; // обработка ошибок
+//     }
+// }
 
 stack *LastElem(stack *head) {
     stack *current = NULL;
@@ -226,3 +226,24 @@ void create_Node(double value, int priority_value, TYPE type_value, stack **head
     *head = temp;
 }
 
+int search_type_elem(TYPE x, stack *head) {
+    stack *current = NULL;
+    current = head;
+    int count = 0;
+    int flag = 0;
+    if (head == NULL) {
+        exit(-1);
+    }
+    // if (head == NULL) {
+    //     exit(-1);
+    // }
+    while (current->next != NULL || flag == 1) {
+        if (current->type == x) {
+            flag = 1;
+        }
+        current = current->next;
+        count++;
+        
+    }
+    return count;
+}
