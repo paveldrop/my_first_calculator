@@ -14,6 +14,8 @@ void rpn(stack **head) {
   for (int i = 0; i < length; i++) {
     printf("\n - ______________SUPPORT before pushback recurce %d___________", i);
     printList(support);
+    printf("\n\n\n_________________________READY______________________");
+    printList(ready);
     p = peek(*head, i);
     printf("\n list in rpn p_TYPE_%d", p->type);
     printList(p);
@@ -24,16 +26,28 @@ void rpn(stack **head) {
     if (p->priority == 1) {
       if (support == NULL) {
         pushback(p->value, p->priority, p->type, &support);
-      } else {
+      } else if (support->priority == 1) {
         pushback(support->value, support->priority, support->type, &ready);
         popBack(&support);
         pushback(p->value, p->priority, p->type, &support);
+      } else if (support->priority > 1) {
+        pushback(support->value, support->priority, support->type,  &ready);
+        popBack(&support);
+        pushback(p->value, p->priority, p->type, &support);
       }
-    // }
-    // if (p->priority >= 2) {
     }
+    if (p->priority == 2) {
+      if (support == NULL) {
+        pushback(p->value, p->priority, p->type, &support);
+      } else if (support->priority < 2) {
+        pushback(support->value, support->priority, support->type, &ready);
+      } else if (support->priority >= 2) {
+        pushback(support->value, support->priority, support->type, &ready);
+      }
+    }
+
     // if (p->type != 0 && p->type != 17) {
-    //     pushback(p->value, p->priority, p->type, &support);
+        
     //     // popBack(&p);
     // }
     if (p->type == 17) {
@@ -48,27 +62,20 @@ void rpn(stack **head) {
           }
         }
       }
-    }
+  }
+    // pushback(support->value, support->priority, support->type, &ready);
     printf("\n\n\n_________________________READY______________________");
     printList(ready);
-    printf("\n - ______________SUPPORT before pushback recurce___________");
+    printf("\n - ______________SUPPORT before pushback recurce ___________");
     printList(support);
+  // stack *last = NULL;
+  // while(support != NULL) {
+  //   last = getLast(support);
+  //   pushback(last->value, last->priority, last->type, &ready);
+  //   popBack(&support);
+  // }
+  move_all_in_Ready (&support,&ready);
 
-    if (support->next == NULL) {
-      pushback(support->value, support->priority, support->type, &ready);
-    } else {
-      while (support->next != NULL) {
-        pushback(support->value, support->priority, support->type, &ready);
-        *support = *support->next;
-      }
-    }
-      // popBack(&support);
-      // if (support->next == NULL) {
-      //   deleteList(&support);
-      // }
-      // support = support->next;
-      
-    // }
   
   printf("\n\n\n_________________________READY______________________");
   printList(ready);

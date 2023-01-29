@@ -128,36 +128,11 @@ double pop(stack **head) {
         exit(-1);
     }
     prev = (*head);
-    val = prev->value;
+    val = prev->type;
     (*head) = (*head)->next;
     free(prev);
     return val;
 }
-
-// void popBack(stack **head) {
-//     stack *current = NULL;  //текущий узел
-//     stack *prev = NULL;  //предыдущий узел
-//     //Получили NULL
-//     if (!head) {
-//         exit(-1);
-//     }
-//     //Список пуст
-//     if (!(*head)) {
-//         exit(-1);
-//     }
-//     current = *head; 
-//     while (current->next) { 
-//         prev = current;
-//         current = current->next;
-//     }
-//     if (prev == NULL) {
-//         free(*head);
-//         *head = NULL;
-//     } else {
-//         free(current->next);
-//         prev->next = NULL;
-//     }
-// }
 
 void popBack(stack** head){
     stack *last = NULL;
@@ -178,29 +153,6 @@ void popBack(stack** head){
         free(last->next);
         last->next = NULL;
     }
-    // stack *temp = *head;
-    // stack *previous = NULL;
-
-    // if (*head == NULL){
-    //     printf("Linked List Empty, nothing to delete");
-    //     return;
-    // }
-
-    // if (temp->next == NULL){
-    //     printf("%f deleted\n",(*head)->value);
-    //     *head = NULL;
-    //     return;
-    // }
-    // while (temp->next != NULL) 
-    // {
-    //     previous = temp; 
-    //     temp = temp->next; 
-    // }
-
-    // previous->next = NULL;
-
-    // printf("%f deleted\n", temp->value);
-    // free(temp);
 }
 
 int search_pos_elem(stack *head) {
@@ -232,13 +184,14 @@ stack *peek(stack *head, int pos){
     }
 }
 
-// int peek_type(stack *head){
-//     if(head != NULL){
-//         return head->type;
-//     } else {
-//         return -999; // обработка ошибок
-//     }
-// }
+void move_all_in_Ready (stack **in_sup, stack **in_ready) {
+    stack *last = NULL;
+    while (*in_sup != NULL) {
+        last = getLast(*in_sup);
+        pushback(last->value, last->priority, last->type, in_ready);
+        popBack(in_sup);
+  }
+}
 
 stack *LastElem(stack *head) {
     stack *current = NULL;

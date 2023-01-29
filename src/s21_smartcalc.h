@@ -43,3 +43,4 @@ double pop(stack **head);
 stack *peek(stack *head, int pos);
 int search_pos_elem(stack *head);
 stack *getLastButOne(stack *head);
+void move_all_in_Ready (stack **in_sup, stack **in_ready);
