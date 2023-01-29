@@ -12,7 +12,7 @@ int main() {
     parser(input_expression, &input);
     // printList(input);
     reverse(&input);
-    rpn(input);
+    rpn(&input);
     printList(input);
     
     deleteList(&input);

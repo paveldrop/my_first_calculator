@@ -33,13 +33,14 @@ void reverse(stack **head) {
 
 
 void printList(stack *head) {
-    printf("\n");
+    printf("\nBEGIN\n");
     while(head != NULL) {
         // printf("%f = value| %d = priority| %d = type ->__", head->value, head->priority, head->type);
         printf("%f = value| %d = type <------   ", head->value, head->type);
         // printList(head->next);
         head = head->next;
     }
+    printf("END");
     printf("\nNULL or stack is free\n");
 }
 
@@ -65,15 +66,18 @@ void printList(stack *head) {
 // }
 
 void deleteList(stack **head) {
-    if (head != NULL) {
-        stack *prev = NULL;
-        while ((*head)->next) {
-            prev = *head;
-            *head = (*head)->next;
-            free(prev);
+    if(*head != NULL) {
+        if (head != NULL) {
+            stack *prev = NULL;
+            while ((*head)->next) {
+                prev = *head;
+                *head = (*head)->next;
+                free(prev);
+            }
         }
-    free(*head);
+        free(*head);
     } else {
+        free(*head);
         printf("\nStrack is EMPTY\n");
     }
 }
@@ -83,6 +87,7 @@ void pushback(double value, int priority_value, TYPE type_value, stack **head) {
         if (*head != NULL) {
             stack *last = getLast(*head);
             stack *tmp = (stack*) malloc(sizeof(stack));
+            // stack *tmp = NULL;
             tmp->value = value;
             tmp->priority = priority_value;
             tmp->type = type_value;
@@ -98,6 +103,19 @@ stack *getLast(stack *head) {
         return NULL;
     }
     while (head->next) {
+        head = head->next;
+    }
+    return head;
+}
+
+stack *getLastButOne(stack *head) {
+    if (head == NULL) {
+        exit(-2);
+    }
+    if (head->next == NULL) {
+        return NULL;
+    }
+    while (head->next->next) {
         head = head->next;
     }
     return head;
@@ -142,29 +160,47 @@ double pop(stack **head) {
 // }
 
 void popBack(stack** head){
-    stack *temp = *head;
-    stack * previous;
-
-    if (*head == NULL){
-        printf("Linked List Empty, nothing to delete");
-        return;
+    stack *last = NULL;
+    //Получили NULL
+    if (!head) {
+        exit(-1);
     }
-
-    if (temp->next == NULL){
-        printf("%f deleted\n",(*head)->value);
+    //Список пуст
+    if (!(*head)) {
+        exit(-1);
+    }
+    last = getLastButOne(*head);
+    //Если в списке один элемент
+    if (last == NULL) {
+        free(*head);
         *head = NULL;
-        return;
+    } else {
+        free(last->next);
+        last->next = NULL;
     }
-    while (temp->next != NULL) 
-    {
-        previous = temp; 
-        temp = temp->next; 
-    }
+    // stack *temp = *head;
+    // stack *previous = NULL;
 
-    previous->next = NULL;
+    // if (*head == NULL){
+    //     printf("Linked List Empty, nothing to delete");
+    //     return;
+    // }
 
-    printf("%f deleted\n", temp->value);
-    free(temp);
+    // if (temp->next == NULL){
+    //     printf("%f deleted\n",(*head)->value);
+    //     *head = NULL;
+    //     return;
+    // }
+    // while (temp->next != NULL) 
+    // {
+    //     previous = temp; 
+    //     temp = temp->next; 
+    // }
+
+    // previous->next = NULL;
+
+    // printf("%f deleted\n", temp->value);
+    // free(temp);
 }
 
 int search_pos_elem(stack *head) {
@@ -226,9 +262,9 @@ void create_Node(double value, int priority_value, TYPE type_value, stack **head
     *head = temp;
 }
 
-int search_type_elem(TYPE type, stack *head) {
+int search_type_elem(TYPE type, stack **head) {
     stack *current = NULL;
-    current = head;
+    current = *head;
     int count = 0;
     int flag = 0;
     if (head == NULL) {
@@ -237,7 +273,7 @@ int search_type_elem(TYPE type, stack *head) {
     // if (head == NULL) {
     //     exit(-1);
     // }
-    while (current->next != NULL || flag != 1) {
+    while (current != NULL || flag != 1) {
         if (current->type == type) {
             flag = 1;
         }
