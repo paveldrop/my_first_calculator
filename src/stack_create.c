@@ -184,6 +184,13 @@ stack *peek(stack *head, int pos){
     }
 }
 
+void pull_to_insert(stack **source, stack **dest) {
+    stack *last = NULL;
+    last = getLast(*source);
+    pushback(last->value, last->priority, last->type, dest);
+    popBack(source);
+}
+
 void move_all_in_Ready (stack **in_sup, stack **in_ready) {
     stack *last = NULL;
     while (*in_sup != NULL) {
@@ -191,6 +198,15 @@ void move_all_in_Ready (stack **in_sup, stack **in_ready) {
         pushback(last->value, last->priority, last->type, in_ready);
         popBack(in_sup);
   }
+}
+
+int GetLastPriority(stack **source) {
+    stack *last = NULL;
+    last = getLast(*source);
+    if (last == NULL) {
+        return 0;
+    }
+    return last->priority;
 }
 
 stack *LastElem(stack *head) {

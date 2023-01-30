@@ -7,18 +7,17 @@ void rpn(stack **head) {
   stack *ready = NULL;
   stack *support = NULL;
   int length_ready = 0;
+  int lastprior = 0;
   int length = search_pos_elem(*head);
 //   p = getLast(head);
 //   p = head;
   reverse(head);
   for (int i = 0; i < length; i++) {
-    printf("\n - ______________SUPPORT before pushback recurce %d___________", i);
-    printList(support);
-    printf("\n\n\n_________________________READY______________________");
-    printList(ready);
     p = peek(*head, i);
-    printf("\n list in rpn p_TYPE_%d", p->type);
+    lastprior = GetLastPriority(&support);
+    printf("\n\n\n\n list in rpn p_PRIOR_%d________BEGIN", p->priority);
     printList(p);
+
     if (p->type == 0) {
         pushback(p->value, p->priority, p->type, &ready);
         // popBack(&p);
@@ -26,24 +25,27 @@ void rpn(stack **head) {
     if (p->priority == 1) {
       if (support == NULL) {
         pushback(p->value, p->priority, p->type, &support);
-      } else if (support->priority == 1) {
-        pushback(support->value, support->priority, support->type, &ready);
-        popBack(&support);
+      } else if (lastprior == 1) {
+        pull_to_insert(&support, &ready);
         pushback(p->value, p->priority, p->type, &support);
-      } else if (support->priority > 1) {
-        pushback(support->value, support->priority, support->type,  &ready);
-        popBack(&support);
+      } else if (lastprior > 1) {
+        pull_to_insert(&support, &ready);
         pushback(p->value, p->priority, p->type, &support);
       }
     }
+    
     if (p->priority == 2) {
       if (support == NULL) {
         pushback(p->value, p->priority, p->type, &support);
-      } else if (support->priority < 2) {
-        pushback(support->value, support->priority, support->type, &ready);
-      } else if (support->priority >= 2) {
-        pushback(support->value, support->priority, support->type, &ready);
+      } else if (lastprior < 2) {
+        pushback(p->value, p->priority, p->type, &support);
+        
+      } else if (lastprior == 2) {
+        pull_to_insert(&support, &ready);
+        pushback(p->value, p->priority, p->type, &support);
       }
+      printf("\n\n\n_____________________________________\nSUPPORT PRIORITY _%d", GetLastPriority(&support));
+      
     }
 
     // if (p->type != 0 && p->type != 17) {
@@ -62,6 +64,10 @@ void rpn(stack **head) {
           }
         }
       }
+    printf("\n - ______________SUPPORT before pushback recurce %d___________", i);
+    printList(support);
+    printf("\n\n\n_________________________READY______________________");
+    printList(ready);
   }
     // pushback(support->value, support->priority, support->type, &ready);
     printf("\n\n\n_________________________READY______________________");
@@ -89,3 +95,6 @@ void rpn(stack **head) {
       // deleteList(&p);
     // deleteList(&head);
 }
+
+
+// 1+8/2*8-2+5/8
