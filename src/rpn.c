@@ -15,7 +15,7 @@ void rpn(stack **head) {
   for (int i = 0; i < length; i++) {
     p = peek(*head, i);
     lastprior = GetLastPriority(&support);
-    printf("\n\n\n\n list in rpn p_PRIOR_%d________BEGIN", p->priority);
+    printf("\n\n\n\n _________________________________________________________________\nlist in rpn p_PRIOR_%d________BEGIN", p->priority);
     printList(p);
 
     if (p->type == 0) {
@@ -29,9 +29,10 @@ void rpn(stack **head) {
         pull_to_insert(&support, &ready);
         pushback(p->value, p->priority, p->type, &support);
       } else if (lastprior > 1) {
-        pull_to_insert(&support, &ready);
+        move_all_in_Ready(&support, &ready);
         pushback(p->value, p->priority, p->type, &support);
       }
+      printf("\n\n\n_____________________________________\nSUPPORT PRIORITY _%d", GetLastPriority(&support));
     }
     
     if (p->priority == 2) {
@@ -43,15 +44,25 @@ void rpn(stack **head) {
       } else if (lastprior == 2) {
         pull_to_insert(&support, &ready);
         pushback(p->value, p->priority, p->type, &support);
+      } else {
+        move_all_in_Ready(&support, &ready);
+        pushback(p->value, p->priority, p->type, &support);
       }
       printf("\n\n\n_____________________________________\nSUPPORT PRIORITY _%d", GetLastPriority(&support));
       
     }
 
-    // if (p->type != 0 && p->type != 17) {
-        
-    //     // popBack(&p);
-    // }
+    if (p->priority == 3) {
+      if (support == NULL) {
+
+      } else if (lastprior < 3) {
+      
+      } else if (lastprior == 3) {
+      
+      } else {
+      
+      }
+    }
     if (p->type == 17) {
         length_ready = search_pos_elem(support) - search_type_elem(bracket_open, &support) + 1;
         printf("zdes' error %d kolichestvo elements %d, zdes' bracket %d\n", length_ready, search_pos_elem(support),search_type_elem(bracket_open, &support));
@@ -64,6 +75,7 @@ void rpn(stack **head) {
           }
         }
       }
+      printf("\n\n\n_____________________________________SUPPORT PRIORITY _%d", GetLastPriority(&support));
     printf("\n - ______________SUPPORT before pushback recurce %d___________", i);
     printList(support);
     printf("\n\n\n_________________________READY______________________");
