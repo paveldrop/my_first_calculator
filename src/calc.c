@@ -8,15 +8,17 @@ int main() {
     char *input_expression = {0};
     input_expression = read_full_line();
     stack *input = NULL;
+    stack *ready = NULL;
     validator(input_expression);
     parser(input_expression, &input);
     // printList(input);
     reverse(&input);
-    rpn(&input);
+    rpn(&input, &ready);
     calculate(&ready);
-    printList(input);
+    // printList(input);
     
     deleteList(&input);
+    // deleteList(&ready);
 
     free(input_expression);
     return 0;

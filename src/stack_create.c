@@ -173,6 +173,23 @@ stack *peek(stack *head, int pos){
     }
 }
 
+
+double peek_dbl(stack *head, int pos) {
+    // struct Node* ptr = top;
+    int counter = 0;
+    double error = 0;
+    while (counter < pos && head) {
+        head = head->next;
+        counter++;
+    }
+    if (head != NULL) {
+        error = head->value;
+    } else {
+        error = -99;
+    }
+    return error;
+}
+
 void pull_to_insert(stack **source, stack **dest) {
     stack *last = NULL;
     last = getLast(*source);

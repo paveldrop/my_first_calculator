@@ -28,7 +28,7 @@ char *dynamic_char_line(FILE *stdin);
 int validator(char *input_expression);
 void parser(char *indef, stack **head);
 int index_cursor(int index, char *input_expression);
-stack *rpn(stack **head);
+stack *rpn(stack **head, stack **ready);
 double calculate(stack **source);
 
 
@@ -52,3 +52,4 @@ void pull_to_insert(stack **source, stack **dest);
 int GetLastPriority(stack **source);
 void pull_to_bracket(stack **source, stack **dest);
 char stack_to_array(stack *source, char *output);
+double peek_dbl(stack *head, int pos);
