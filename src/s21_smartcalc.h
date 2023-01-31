@@ -5,8 +5,11 @@
 #include <stddef.h>
 #include <ctype.h>
 
-typedef enum {number = 0, x = 1, plus = 2, minus = 3, bracket_open = 4, add = 5, sub = 6, in_cos = 7, in_sin = 8, in_tg = 9,
-              in_acos = 10, in_asin = 11, in_atan = 12, in_sqrt = 13, in_ln = 14, in_log = 15, in_pow = 16, bracket_close = 17 } TYPE;
+typedef enum {number, x, plus, minus = 3, bracket_open = 4,
+              add = 5, sub = 6, in_cos = 7, in_sin = 8, in_tg = 9,
+              in_acos = 10, in_asin = 11, in_atan = 12, in_sqrt = 13,
+              in_ln = 14, in_log = 15, in_pow = 16, bracket_close = 17,
+              in_mod = 18} TYPE;
 
 // pririty: 0 = number, 1 = +-, 2 = */mod, 3 = ^ or sqrt, 4 = sin cos...., 5 = ();
 
@@ -25,7 +28,8 @@ char *dynamic_char_line(FILE *stdin);
 int validator(char *input_expression);
 void parser(char *indef, stack **head);
 int index_cursor(int index, char *input_expression);
-void rpn(stack **head);
+stack *rpn(stack **head);
+double calculate(stack **source);
 
 
 /*WORK WITH STACK LINKED LIST*/
@@ -46,3 +50,5 @@ stack *getLastButOne(stack *head);
 void move_all_in_Ready (stack **in_sup, stack **in_ready);
 void pull_to_insert(stack **source, stack **dest);
 int GetLastPriority(stack **source);
+void pull_to_bracket(stack **source, stack **dest);
+char stack_to_array(stack *source, char *output);

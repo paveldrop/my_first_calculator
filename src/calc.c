@@ -13,6 +13,7 @@ int main() {
     // printList(input);
     reverse(&input);
     rpn(&input);
+    calculate(&ready);
     printList(input);
     
     deleteList(&input);

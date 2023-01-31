@@ -1,4 +1,5 @@
 #include "s21_smartcalc.h"
+#include <string.h>
 
 void parser(char *input_expression, stack **head) {
     double chislo;
@@ -24,11 +25,11 @@ void parser(char *input_expression, stack **head) {
         }
         if (p[i] == 40) { // symbols "( and )"
             printf("\n\nya BRACKET(((('!!!!!!!!!!!");
-            pushback(0, 5, 4, head);
+            pushback(0, -1, 4, head);
             // continue;
         }
         if (p[i] == 41) {
-            pushback(0, 5, 17, head);
+            pushback(0, -1, 17, head);
             printf("\n\nya BRACKET)))))'!!!!!!!!!!!");
         }
         if (p[i] == 43) { // symbol "+""
@@ -98,24 +99,21 @@ void parser(char *input_expression, stack **head) {
             
             pushback(0, 4, 14, head);
             i = index_cursor(i, input_expression); // -ln(9)+atan(9)-2.6*tg(9)
-            printf("\n\nposle sin LN index!!!!!!!!!!!%d", i);
         }
         if (strncmp(&p[i], "log", 3) == 0) {
-            // chislo = strtod(p + (i + 4), NULL);
-            
             pushback(0, 4, 15, head);
             i = index_cursor(i, input_expression);
-            printf("\n\nposle sin LOG index!!!!!!!!!!!%d", i);
         }
         if (strncmp(&p[i], "^", 1) == 0) {
-            // chislo = strtod(p + (i + 1), NULL);
-            
             pushback(0, 4, 16, head);
             i = index_cursor(i, input_expression);
-            printf("\n\nposle sin ACOS index!!!!!!!!!!!%d", i);
         }
         if (strncmp(&p[i], "sqrt", 4) == 0) {
             pushback(0, 3, 13, head);
+            i = index_cursor(i, input_expression);
+        }
+        if (strncmp(&p[i], "mod", 3) == 0) {
+            pushback(0, 2, 18, head);
             i = index_cursor(i, input_expression);
         }
     }

@@ -44,26 +44,15 @@ void printList(stack *head) {
     printf("\nNULL or stack is free\n");
 }
 
-
-// void deleteList(stack **head) {
-//     stack *prev = NULL;
-//     while((*head)->next) {
-//         prev = *head;
-//         *head = (*head)->next;
-//         free(prev);
-//     }
-//     free(*head);
-// }
-
-// stack *deleteList(stack *head) {
-//     while (head != 0) {
-//         stack *p = head;
-//         head = head-> next;
-//         free(p);
-//     }
-//     free(head);
-//     return NULL;
-// }
+void pull_to_bracket(stack **source, stack **dest) {
+    stack *last = getLast(*source);
+    while (last->type != bracket_open) {
+        pushback(last->value, last->priority, last->type, dest);
+        popBack(source);
+        last = getLast(*source);
+    }
+    popBack(source);
+}
 
 void deleteList(stack **head) {
     if(*head != NULL) {
@@ -198,6 +187,18 @@ void move_all_in_Ready (stack **in_sup, stack **in_ready) {
         pushback(last->value, last->priority, last->type, in_ready);
         popBack(in_sup);
   }
+}
+
+char stack_to_array(stack *source, char *output) {
+    while (source != NULL) {
+        // if (source->type != 0) {
+        //     sprintf(output + strlen(output), "%s ", source->type);
+        
+        // }
+        sprintf(output + strlen(output), "%f ", source->value);
+        source = source->next;
+    }
+    return *output;
 }
 
 int GetLastPriority(stack **source) {
