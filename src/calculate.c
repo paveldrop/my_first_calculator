@@ -15,7 +15,8 @@ double calculate(stack **source) {
         double p3 = 0;
         p = peek(*source, i);
         int done_length = search_pos_elem(done);
-        if (search_pos_elem(done) >= 2) {
+        if ((search_pos_elem(done) >= 2 && (p->type >= 1 && p->type <= 5)) ||
+            (search_pos_elem(done) >= 2 && (p->type >= 16 && p->type <= 18))) {
             p2 = peek_dbl(done, done_length - 2);
             p3 = peek_dbl(done, done_length - 1);
             if (p->type == minus) {
@@ -47,7 +48,8 @@ double calculate(stack **source) {
                 popBack(&done);
                 pushback(fmod(p2, p3), 0, 0, &done);
             }
-        } else if (p->type >= in_cos && in_log <= p->type) {
+        } else if ((p->type >= in_cos && p->type <= in_log) ||
+                    (p->type >= unar_minus && p->type <= unar_plus)) {
             p2 = peek_dbl(done, done_length - 1);
             if (p->type == in_cos) {
                 popBack(&done);
@@ -76,6 +78,9 @@ double calculate(stack **source) {
             } else if (p->type == in_log) {
                 popBack(&done);
                 pushback(log10(p2), 0, 0, &done);
+            } else if (p->type == unar_minus) {
+                popBack(&done);
+                pushback(-(p2), 0, 0, &done);
             }
         }
         if (p->type == 0) {

@@ -11,17 +11,17 @@ void parser(char *input_expression, stack **head) {
         if ((p[i] >= '0' && p[i] <= '9') || p[i+1] == '.') {
             chislo = strtod((p + i), NULL);
             printf("\n double number - %f", chislo);
-            if (i >= 2 && p[i-1] == 45 && p[i-2] == 40 ) {
-                chislo *= -1;
-                pushback(chislo, 0, 0, head);
-            // } else if (i-1 == 0 && p[i-1] == 45) {
-            //     pushback(chislo, 0, 3, head);
-            } else {
+            // if (i >= 2 && p[i-1] == 45 && p[i-2] == 40 ) {
+            //     chislo *= -1;
+            //     pushback(chislo, 0, 0, head);
+            // // } else if (i-1 == 0 && p[i-1] == 45) {
+            // //     pushback(chislo, 0, 3, head);
+            // } else {
                 pushback(chislo, 0, 0, head);
             // }
             i = index_cursor(i, input_expression);
             printf("\n\nya zdes'!!!!!!!!!!!%d!!!!!", i);
-            }
+            
         }
         if (p[i] == 40) { // symbols "( and )"
             printf("\n\nya BRACKET(((('!!!!!!!!!!!");
@@ -37,14 +37,13 @@ void parser(char *input_expression, stack **head) {
             printf("\n\nya zdes'!!!!!!!!!!!");
         }
         if (p[i] == 45) { // symbol "-"
-            if (i == 0 && isdigit(p[i+1])) {
-                continue;
-            } else if(isdigit(p[i+1]) && p[i-1] == 40) { // "(-a...."
-                continue;
+            if (i == 0) {
+                pushback(0, -2, unar_minus, head);
+            } else if (i >= 1 && p[i - 1] == 40) {
+                pushback(0, -2, unar_minus, head);
             } else {
-                pushback(0, 1, 3, head);
+                pushback(0, 1, minus, head);
             }
-            // continue;
         }
         if (p[i] == 42) { // symbol "*"
             pushback(0, 2, 5, head);

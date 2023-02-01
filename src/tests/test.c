@@ -1,5 +1,5 @@
 #include <check.h>
-#include "s21_smartcalc.h"
+#include "../s21_smartcalc.h"
 
 
 #define EPS 1e-2
@@ -13,7 +13,6 @@ START_TEST(calculate_01) {
   parser(str, &input);
   reverse(&input);
   rpn(&input, &ready);
-  calculate(&ready);
   test_num = calculate(&ready);
   ck_assert_double_eq(test_num, result_num);
 }
@@ -21,29 +20,27 @@ END_TEST
 
 START_TEST(calculate_02) {
   char str[] = "-7+8";
-  double result_num = 1, test_num, x = 0;
+  double result_num = 1, test_num = 0;
   stack *input = NULL;
   stack *ready = NULL;
   validator(str);
   parser(str, &input);
   reverse(&input);
   rpn(&input, &ready);
-  calculate(&ready);
   test_num = calculate(&ready);
   ck_assert_double_eq(test_num, result_num);
 }
 END_TEST
 
 START_TEST(calculate_03) {
-  char str[] = "11mod3";
-  double result_num = 2, test_num, x = 0;
+  char str[] = "99*(-10)+21";
+  double result_num = 2, test_num = 0;
   stack *input = NULL;
   stack *ready = NULL;
   validator(str);
   parser(str, &input);
   reverse(&input);
   rpn(&input, &ready);
-  calculate(&ready);
   test_num = calculate(&ready);
   ck_assert_double_eq(test_num, result_num);
 }

@@ -33,10 +33,10 @@ void reverse(stack **head) {
 
 
 void printList(stack *head) {
-    printf("\nBEGIN\n");
+
     while(head != NULL) {
         // printf("%f = value| %d = priority| %d = type ->__", head->value, head->priority, head->type);
-        printf("%f = value| %d = type <------   ", head->value, head->type);
+        printf("\n%f = value;\n%d = priotity;\n%d = type;\n___<---", head->value, head->priority, head->type);
         // printList(head->next);
         head = head->next;
     }

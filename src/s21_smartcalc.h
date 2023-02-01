@@ -9,9 +9,9 @@ typedef enum {number, x, plus, minus = 3, bracket_open = 4,
               mult = 5, in_div = 6, in_cos = 7, in_sin = 8, in_tan = 9,
               in_acos = 10, in_asin = 11, in_atan = 12, in_sqrt = 13,
               in_ln = 14, in_log = 15, in_pow = 16, bracket_close = 17,
-              in_mod = 18} TYPE;
+              in_mod = 18, unar_minus = 19, unar_plus = 20} TYPE;
 
-// pririty: 0 = number, 1 = +-, 2 = */mod, 3 = ^ or sqrt, 4 = sin cos...., 5 = ();
+// pririty: -2 = unar -+, 0 = number, 1 = +-, 2 = */mod, 3 = ^ or sqrt, 4 = sin cos...., 5 = ();
 
 
 // -ln(9)+atan(9)-2*tan(9)

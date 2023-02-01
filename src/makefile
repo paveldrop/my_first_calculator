@@ -1,5 +1,5 @@
 SOURCE = *.c
-SOURCE_TEST = parser.c rpn.c stack_create.c validator.c calculate.c ./test/test.c
+SOURCE_TEST = parser.c rpn.c stack_create.c validator.c calculate.c ./tests/test.c
 OBJ = *.o
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
@@ -16,7 +16,7 @@ calc:
 # uninstall:
 
 clean:
-	rm -rf *.o ./calc *.gcno *.gcda ./test
+	rm -rf *.o ./calc *.gcno *.gcda ./test *.dSYM
 
 # dvi:
 

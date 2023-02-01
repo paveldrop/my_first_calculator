@@ -20,6 +20,9 @@ stack *rpn(stack **head, stack **ready) {
         pushback(p->value, p->priority, p->type, ready);
         // popBack(&p);
     }
+    if (p->priority == -2) {
+      pushback(p->value, p->priority, p->type, &support);
+    }
     if (p->priority == 1) {
       if (support == NULL) {
         pushback(p->value, p->priority, p->type, &support);
