@@ -1,4 +1,5 @@
 SOURCE = *.c
+SOURCE_TEST = parser.c rpn.c stack_create.c validator.c calculate.c ./test/test.c
 OBJ = *.o
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
@@ -15,17 +16,20 @@ calc:
 # uninstall:
 
 clean:
-	rm -rf *.o  ./calc 
+	rm -rf *.o ./calc *.gcno *.gcda ./test
 
 # dvi:
 
 # dist:
 
-# tests: install
+test:
+	$(CC) $(GCOVFLAGS) $(SOURCE_TEST) -g -c
+	$(CC) $(GCOVFLAGS) $(OBJ) -o test
+	./test
 
-gcov_report: tests
+gcov_report: test
 	gcovr .
-	gcovr --html-details -o report.html
-	open ./report.html
+	gcovr --html-details -o report.html && mv *.html *.css ./report_gcov
+	open ./report_gcov/report.html
 
 

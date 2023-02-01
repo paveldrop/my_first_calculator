@@ -15,8 +15,8 @@ int main() {
     reverse(&input);
     rpn(&input, &ready);
     calculate(&ready);
-    // printList(input);
-    
+    printList(input);
+    printf("\n My string_______%s", input_expression);
     deleteList(&input);
     // deleteList(&ready);
 

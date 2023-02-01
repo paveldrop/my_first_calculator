@@ -4,9 +4,7 @@
 
 stack *rpn(stack **head, stack **ready) {
   stack *p = NULL;
-  // stack *ready = NULL;
   stack *support = NULL;
-  int length_ready = 0;
   int lastprior = 0;
   int length = search_pos_elem(*head);
 //   p = getLast(head);
