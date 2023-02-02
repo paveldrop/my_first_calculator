@@ -16,6 +16,7 @@ typedef enum {number, x, plus, minus = 3, bracket_open = 4,
 
 // -ln(9)+atan(9)-2*tan(9)
 // cos(9+2)-1
+// 99*(-10)+21
 typedef struct stack{
     double value;
     int priority;

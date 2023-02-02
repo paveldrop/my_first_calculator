@@ -1,5 +1,6 @@
 #include "s21_smartcalc.h"
 #include <string.h>
+// #include <unistd.h>
 
 void parser(char *input_expression, stack **head) {
     double chislo;
@@ -53,6 +54,10 @@ void parser(char *input_expression, stack **head) {
             pushback(0, 2, 6, head);
             // continue;
         }
+        if (p[i] == 94) { // symbol "^"
+            pushback(0, 3, 16, head);
+            // i = index_cursor(i, input_expression);
+        }
         printf("\n\nya zdes'!!!!!!!!!!!%d!!!!!%s", strncmp(&p[i], "sin", 3), &p[i]);
         if (strncmp(&p[i], "sin", 3) == 0) {
         //     chislo = strtod(p + (i + 4), NULL);
@@ -103,10 +108,6 @@ void parser(char *input_expression, stack **head) {
             pushback(0, 4, 15, head);
             i = index_cursor(i, input_expression);
         }
-        if (strncmp(&p[i], "^", 1) == 0) {
-            pushback(0, 4, 16, head);
-            i = index_cursor(i, input_expression);
-        }
         if (strncmp(&p[i], "sqrt", 4) == 0) {
             pushback(0, 3, 13, head);
             i = index_cursor(i, input_expression);
@@ -123,7 +124,8 @@ void parser(char *input_expression, stack **head) {
 int index_cursor(int index, char *input_expression) { // проверка если следующий символ не является цифрой или закрытием скобки?????
     for (int j = 0; j < 256; j++) {
                 if ((isdigit(input_expression[index]) || input_expression[index] == '.') || 
-                    (input_expression[index] >= 'a' && input_expression[index] <= 'z')) { // || input_expression[index] == '(' || input_expression[index] == ')'
+                    (input_expression[index] >= 'a' && input_expression[index] <= 'z')) {
+                    // (input_expression[index] == '^')input_expression[index] == '(' || input_expression[index] == ')'
                     index++;
                 } else {
                     break;

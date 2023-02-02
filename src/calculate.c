@@ -6,16 +6,16 @@ double calculate(stack **source) {
     // stack_to_array(*source, rpn_output);
     stack *p = NULL;
     stack *done = NULL;
-    stack *result = NULL;
+    // stack *result = NULL;
     double end_number = 0;
-    
+    printList(*source);
     int length = search_pos_elem(*source);
     for (int i = 0; i < length; i++) {
         double p2 = 0;
         double p3 = 0;
         p = peek(*source, i);
         int done_length = search_pos_elem(done);
-        if ((search_pos_elem(done) >= 2 && (p->type >= 1 && p->type <= 5)) ||
+        if ((search_pos_elem(done) >= 2 && (p->type >= 1 && p->type <= 6)) ||
             (search_pos_elem(done) >= 2 && (p->type >= 16 && p->type <= 18))) {
             p2 = peek_dbl(done, done_length - 2);
             p3 = peek_dbl(done, done_length - 1);
@@ -35,10 +35,10 @@ double calculate(stack **source) {
                 popBack(&done);
                 popBack(&done);
                 pushback(p2 / p3, 0, 0, &done);
-            } else if (p->type == mult) {
-                popBack(&done);
-                popBack(&done);
-                pushback(p2 * p3, 0, 0, &done);
+            // } else if (p->type == mult) {
+            //     popBack(&done);
+            //     popBack(&done);
+                // pushback(p2 * p3, 0, 0, &done);
             }  else if (p->type == in_pow) {
                 popBack(&done);
                 popBack(&done);
@@ -86,13 +86,16 @@ double calculate(stack **source) {
         if (p->type == 0) {
             pushback(p->value, p->priority, p->type, &done);
         }
+        printf("\n_____ P STACK______after_recurce %d", i);
         printList(p);
+        printf("\n_____ DONE STACK______after_recurce %d", i);
         printList(done);
     }
     end_number = done->value;
-        // printList(result);
+    printf("\n_____ RESULT STACK______");
+        printList(done);
     deleteList(&done);
-    deleteList(&result);
+    // deleteList(&result);
     deleteList(source);
     return end_number;
     
