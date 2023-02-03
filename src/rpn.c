@@ -1,10 +1,12 @@
 #include "s21_smartcalc.h"
+// #include <cstddef>
 #include <stdio.h>
 
 
 stack *rpn(stack **head, stack **ready) {
   stack *p = NULL;
   stack *support = NULL;
+  stack *pow_push = NULL;
   int lastprior = 0;
   int length = search_pos_elem(*head);
 //   p = getLast(head);
@@ -35,9 +37,10 @@ stack *rpn(stack **head, stack **ready) {
       } else if (lastprior == -1) {
         pushback(p->value, p->priority, p->type, &support);
       }
-      // printf("\n\n\n_____________________________________\nSUPPORT PRIORITY _%d", GetLastPriority(&support));
     }
-    
+    if (support != NULL) {
+    printf("\n\n\n_____________________________________\nSUPPORT PRIORITY _last%d and first? %d", GetLastPriority(&support), support->priority);
+    }
     if (p->priority == 2) {
       if (support == NULL) {
         pushback(p->value, p->priority, p->type, &support);
@@ -47,7 +50,9 @@ stack *rpn(stack **head, stack **ready) {
         pull_to_insert(&support, ready);
         pushback(p->value, p->priority, p->type, &support);
       } else if (lastprior == 3) {
-        pushback(support->value, support->priority, support->type, ready);
+        pow_push = getLast(support);
+        pushback(pow_push->value, pow_push->priority, pow_push->type, ready);
+        popBack(&support);
         pushback(p->value, p->priority, p->type, &support);
       } else {
         move_all_in_Ready(&support, ready);

@@ -8,7 +8,7 @@ GCOVFLAGS = -lcheck -lgcov -coverage
 all: clean calc
 
 calc:
-	gcc $(CFLAGS) $(SOURCE) -o calc
+	gcc $(CFLAGS) $(SOURCE) -o calc -lm
 	./calc
 
 # install:
@@ -24,7 +24,7 @@ clean:
 
 test:
 	$(CC) $(GCOVFLAGS) $(SOURCE_TEST) -g -c
-	$(CC) $(GCOVFLAGS) $(OBJ) -o test
+	$(CC) $(GCOVFLAGS) $(OBJ) -lm -o test
 	./test
 
 gcov_report: test

@@ -31,6 +31,7 @@ void parser(char *indef, stack **head);
 int index_cursor(int index, char *input_expression);
 stack *rpn(stack **head, stack **ready);
 double calculate(stack **source);
+char no_space(char *input);
 
 
 /*WORK WITH STACK LINKED LIST*/
