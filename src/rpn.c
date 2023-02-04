@@ -1,5 +1,4 @@
 #include "s21_smartcalc.h"
-// #include <cstddef>
 #include <stdio.h>
 
 
