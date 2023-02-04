@@ -1,4 +1,4 @@
-#include "s21_smartcalc.h"
+#include "smartcalc.h"
 
 
 #define read_full_line() ( dynamic_char_line(stdin) )

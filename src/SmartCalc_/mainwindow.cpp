@@ -47,11 +47,34 @@ MainWindow::~MainWindow()
 void MainWindow::digits_numbers() {
 
     QPushButton *button = (QPushButton *)sender();
-    QString new_label;
+    ui->result_show->setText(ui->result_show->text() + button->text());
+}
 
-    double all_numbers = (ui->result_show->text() + button->text()).toDouble();
-    new_label = QString::number(all_numbers, 'g', 255);
+void MainWindow::on_pushButton_dot_clicked()
+{
+    if(!(ui->result_show->text().contains('.')))
+    ui->result_show->setText(ui->result_show->text() +  '.');
+}
 
-    ui->result_show->setText(new_label);
+
+void MainWindow::on_pushButton_AC_clicked()
+{
+    ui->result_show->setText("");
+}
+
+
+void MainWindow::on_pushButton_enter_clicked()
+{
+    QString output;
+//    double result;
+//    valux = ui->lineEdit_X_value->text().toDouble();
+//    int check = main((char*)ui->result_show->text().toStdString().c_str(), valux, &result);
+//    if (!check) {
+//        output = QString::number(result, 'g', 8);
+//        ui->result_show->setText(output);
+//    } else {
+//        ui->result_show->setText("incorrect data");
+//    }
 
 }
+

@@ -1,5 +1,5 @@
 #include <check.h>
-#include "../s21_smartcalc.h"
+#include "../smartcalc.h"
 
 
 #define EPS 1e-7

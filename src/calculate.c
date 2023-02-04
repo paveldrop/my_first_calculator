@@ -1,4 +1,4 @@
-#include "s21_smartcalc.h"
+#include "smartcalc.h"
 #include <stdio.h>
 
 double calculate(stack **source) {

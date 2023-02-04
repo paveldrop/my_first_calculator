@@ -1,6 +1,5 @@
-#include "s21_smartcalc.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "smartcalc.h"
+
 // Проверка на символы ввода, и на одинаковые знаки: + - * /
 
 int validator(char *input_expression) {
