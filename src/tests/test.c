@@ -99,7 +99,7 @@ END_TEST
 
 START_TEST(calculate_06) {
   char str[] = "11.0+12.0*13.0";
-  double result_num = 167, test_num, x = 0;
+  double result_num = 167, test_num = 0;
   stack *input = NULL;
   stack *ready = NULL;
   validator(str);
@@ -178,6 +178,19 @@ END_TEST
 START_TEST(calculate_11) {
   char str[] = "2+9.3-8^3/(4+56.2)";
   double result_num = 2.7950166, test_num = 0;
+  stack *input = NULL;
+  stack *ready = NULL;
+  validator(str);
+  parser(str, &input);
+  rpn(&input, &ready);
+  test_num = calculate(&ready);
+  ck_assert_ldouble_eq_tol(test_num, result_num, 1e-7);
+}
+END_TEST
+
+START_TEST(calculate_11_1) {
+  char str[] = "-(2+9.3-8^3/(4+56.2))";
+  double result_num = -2.79501661, test_num = 0;
   stack *input = NULL;
   stack *ready = NULL;
   validator(str);
@@ -353,6 +366,7 @@ Suite *count_test(void) {
   tcase_add_test(tc_core, calculate_10);
   tcase_add_test(tc_core, calculate_10_1);
   tcase_add_test(tc_core, calculate_11);
+  tcase_add_test(tc_core, calculate_11_1);
   // tcase_add_test(tc_core, calculate_12);
   tcase_add_test(tc_core, calculate_13);
   // tcase_add_test(tc_core, calculate_15);

@@ -13,28 +13,28 @@ int validator(char *input_expression) {
     unsigned int count = 0, count_bracket = 0;
 
     // no_space(input_expression);
-    for (unsigned int i = 0; i < strlen(input_expression); i++) {
-        if (input_expression[i] == ')' || input_expression[i] == '(') {
+    for (unsigned int i = 0; i < strlen(wo_spaces_exp); i++) {
+        if (wo_spaces_exp[i] == ')' || wo_spaces_exp[i] == '(') {
             count_bracket++;
         }
         for (unsigned int j = 0; j < strlen(test); j++) {
-            if (input_expression[i] == test[j]) {
-                if((input_expression[i] == input_expression[i + 1]) && input_expression[i] == '+') {
+            if (wo_spaces_exp[i] == test[j]) {
+                if((wo_spaces_exp[i] == wo_spaces_exp[i + 1]) && wo_spaces_exp[i] == '+') {
                     err = -1;
                     break;
-                } else if ((input_expression[i] == input_expression[i + 1]) && input_expression[i] == '-') {
+                } else if ((wo_spaces_exp[i] == wo_spaces_exp[i + 1]) && wo_spaces_exp[i] == '-') {
                     err = -1;
                     break;
-                } else if ((input_expression[i] == input_expression[i + 1]) && input_expression[i] == '*') {
+                } else if ((wo_spaces_exp[i] == wo_spaces_exp[i + 1]) && wo_spaces_exp[i] == '*') {
                     err = -1;
                     break;
-                } else if ((input_expression[i] == input_expression[i + 1]) && input_expression[i] == '/') {
+                } else if ((wo_spaces_exp[i] == wo_spaces_exp[i + 1]) && wo_spaces_exp[i] == '/') {
                     err = -1;
                     break;
-                } else if (input_expression[i] == '(' && input_expression[i + 1] == ')') {
+                } else if (wo_spaces_exp[i] == '(' && wo_spaces_exp[i + 1] == ')') {
                     err = -1;
                     break;
-                } else if (input_expression[i] == ' ') {
+                } else if (wo_spaces_exp[i] == ' ') {
                     err = -2; // пробелы в здании
                     break;
                 }
@@ -43,9 +43,9 @@ int validator(char *input_expression) {
         }
     }
     printf("\ncount = !!!!!!!!!!!!!!!");
-    if (count == strlen(input_expression)) {
+    if (count == strlen(wo_spaces_exp)) {
         err = 0;
-        // printf("\nProverka na simvoly done count = %d symbol in input = %ld", count, strlen(input_expression));
+        // printf("\nProverka na simvoly done count = %d symbol in input = %ld", count, strlen(wo_spaces_exp));
     }
     if (count_bracket % 2 == 1) {
         err = -3;  // недостаточно скобок
