@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QVector>
 
 extern "C" {
     #include "../smartcalc.h"
@@ -21,7 +22,11 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    double x;
+    double x_calc, xBegin, xEnd, h, tempX, yB, yE;
+    int countN;
+
+    QVector<double> x, y;
+
 private slots:
     void digits_numbers();
 
@@ -30,5 +35,6 @@ private slots:
     void on_pushButton_enter_clicked();
     void on_pushButton_build_graph_clicked();
     void on_result_show_returnPressed();
+    void on_x_data_editingFinished();
 };
 #endif // MAINWINDOW_H
