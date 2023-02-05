@@ -52,29 +52,48 @@ void MainWindow::digits_numbers() {
 
 void MainWindow::on_pushButton_dot_clicked()
 {
-    if(!(ui->result_show->text().contains('.')))
-    ui->result_show->setText(ui->result_show->text() +  '.');
+//    if(!(ui->result_show->text().contains('.')))
+//    ui->result_show->setText(ui->result_show->text() +  '.');
+
+    if(!(ui->x_data->text().contains('.')))
+    ui->x_data->setText(ui->x_data->text() +  '.');
 }
 
 
 void MainWindow::on_pushButton_AC_clicked()
 {
     ui->result_show->setText("");
+    ui->x_data->setText("");
 }
 
 
 void MainWindow::on_pushButton_enter_clicked()
 {
     QString output;
-//    double result;
-//    valux = ui->lineEdit_X_value->text().toDouble();
+    double result = 0;
+    double x;
+    x = 0;
 //    int check = main((char*)ui->result_show->text().toStdString().c_str(), valux, &result);
 //    if (!check) {
-//        output = QString::number(result, 'g', 8);
-//        ui->result_show->setText(output);
+    result = smart_calc(x, (char*)ui->result_show->text().toStdString().c_str(), result);
+    output = QString::number(result, 'g', 8);
+    ui->result_show->setText(output);
 //    } else {
 //        ui->result_show->setText("incorrect data");
 //    }
+
+}
+
+
+void MainWindow::on_pushButton_build_graph_clicked()
+{
+    if(!(ui->result_show->text().contains('.')))
+    ui->result_show->setText(ui->result_show->text() +  '.');
+}
+
+
+void MainWindow::on_result_show_returnPressed()
+{
 
 }
 

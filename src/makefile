@@ -1,5 +1,5 @@
 SOURCE = *.c
-SOURCE_TEST = parser.c rpn.c stack_create.c validator.c calculate.c ./tests/test.c
+SOURCE_TEST = parser.c rpn.c stack_func.c validator.c calculate.c ./tests/test.c
 OBJ = *.o
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
@@ -24,7 +24,7 @@ clean:
 
 test:
 	$(CC) $(GCOVFLAGS) $(SOURCE_TEST) -g -c
-	$(CC) $(GCOVFLAGS) $(OBJ) -lm -o test
+	$(CC) $(GCOVFLAGS) $(OBJ) -o test
 	./test
 
 gcov_report: test

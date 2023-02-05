@@ -5,7 +5,6 @@
 void parser(char *input_expression, stack **head) {
     double chislo;
     char *p = input_expression;
-    
     int len_expr_str = strlen(p);
     for (int i = 0; i <= len_expr_str; i++) {
         printf("\n %d - проход\nsymbol - %c\nplace %s", i, p[i], &p[i]);
@@ -48,6 +47,9 @@ void parser(char *input_expression, stack **head) {
         }
         if (p[i] == 94) { // symbol "^"
             pushback(0, 3, 16, head);
+        }
+        if (p[i] == 120) {
+            pushback(0, 0, 1, head);
         }
         printf("\n\nya zdes'!!!!!!!!!!!%d!!!!!%s", strncmp(&p[i], "sin", 3), &p[i]);
         if (strncmp(&p[i], "sin", 3) == 0) {
@@ -123,3 +125,23 @@ int index_cursor(int index, char *input_expression) { // проверка есл
             }
     return index - 1;
 }
+
+// char *x_to_str(double x) {
+//     char *x_str = NULL;
+//     if (x != 0) {
+//         size_t length = 0;
+//         length = (size_t)snprintf(NULL, 0, "%lf", x) + 1;
+//         x_str = malloc(length);
+//         snprintf(x_str, length, "%.8lf", x);
+//     }
+//     return x_str;
+// }
+
+// char *replace_x(char *input, char *x) {
+//     char *p = input;
+//     size_t x_len = strlen(x);
+//     if (strchr(p, 120) != NULL) {
+
+
+//     }
+// }

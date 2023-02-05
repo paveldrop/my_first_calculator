@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 
-stack *rpn(stack **head, stack **ready) {
+stack *rpn(stack **head, stack **ready, double x) {
   stack *p = NULL;
   stack *support = NULL;
   stack *pow_push = NULL;
@@ -20,6 +20,10 @@ stack *rpn(stack **head, stack **ready) {
     if (p->type == 0) {
         pushback(p->value, p->priority, p->type, ready);
         // popBack(&p);
+    } else if (p->type == 1) {
+        if (x != 0) {
+        pushback(x, 0, 0, ready);
+        }
     }
     if (p->priority == -2) {
       pushback(p->value, p->priority, p->type, &support);

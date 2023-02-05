@@ -21,12 +21,14 @@ public:
 
 private:
     Ui::MainWindow *ui;
-
+    double x;
 private slots:
     void digits_numbers();
 
     void on_pushButton_dot_clicked();
     void on_pushButton_AC_clicked();
     void on_pushButton_enter_clicked();
+    void on_pushButton_build_graph_clicked();
+    void on_result_show_returnPressed();
 };
 #endif // MAINWINDOW_H

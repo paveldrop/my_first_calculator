@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>749</width>
-    <height>526</height>
+    <width>750</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="font">
@@ -25,13 +25,13 @@
       <x>0</x>
       <y>0</y>
       <width>751</width>
-      <height>531</height>
+      <height>450</height>
      </rect>
     </property>
     <property name="maximumSize">
      <size>
-      <width>801</width>
-      <height>601</height>
+      <width>751</width>
+      <height>531</height>
      </size>
     </property>
     <property name="tabShape">
@@ -437,17 +437,17 @@
        <string>⌫</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButto">
+     <widget class="QPushButton" name="pushButton_build_graph">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>400</y>
+        <x>190</x>
+        <y>340</y>
         <width>131</width>
         <height>41</height>
        </rect>
       </property>
       <property name="text">
-       <string>PushButton</string>
+       <string>Build Graph</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_AC">
@@ -480,6 +480,43 @@
         <y>30</y>
         <width>320</width>
         <height>60</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+	qproperty-alignment: 'AlignVCenter | AlignRight';
+	border-bottom: 1px solid grey;
+	background-color: white;
+	color: black;
+}</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>340</y>
+        <width>31</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>X =</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="x_data">
+      <property name="geometry">
+       <rect>
+        <x>135</x>
+        <y>345</y>
+        <width>51</width>
+        <height>30</height>
        </rect>
       </property>
       <property name="styleSheet">
