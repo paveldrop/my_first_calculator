@@ -4,7 +4,7 @@
 #define read_full_line() ( dynamic_char_line(stdin) )
 
 
-double smart_calc(double x, char *input_expression, double result) {
+double smart_calc(double x, char *input_expression, double *result) {
     // char *input_expression = {0};
     // input_expression = read_full_line();
     stack *input = NULL;
@@ -15,14 +15,14 @@ double smart_calc(double x, char *input_expression, double result) {
     // printList(input);
     // reverse(&input);
     rpn(&input, &ready, x);
-    result = calculate(&ready);
+    *result = calculate(&ready);
     printList(input);
     printf("\n My string_______%s", input_expression);
     deleteList(&input);
     // deleteList(&ready);
 
 //    free(input_expression);
-    return result;
+    return *result;
 }
 
 char *dynamic_char_line(FILE *stdin) {

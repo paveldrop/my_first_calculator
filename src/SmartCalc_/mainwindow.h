@@ -22,7 +22,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    double x_calc, xBegin, xEnd, h, tempX, yB, yE;
+    double x_calc, xBegin, xEnd, h, tempX, yB, yE, Y;
     int countN;
 
     QVector<double> x, y;

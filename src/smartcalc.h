@@ -31,7 +31,7 @@ void parser(char *indef, stack **head);
 int index_cursor(int index, char *input_expression);
 stack *rpn(stack **head, stack **ready, double x);
 double calculate(stack **source);
-double smart_calc(double x, char *input_expression, double result);
+double smart_calc(double x, char *input_expression, double *result);
 void *no_space(char *input);
 int expr_is_null_or(char *input);
 

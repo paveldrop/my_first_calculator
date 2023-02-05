@@ -75,7 +75,7 @@ void MainWindow::on_pushButton_enter_clicked()
     x_calc = x_num.toDouble();
 //    int check = main((char*)ui->result_show->text().toStdString().c_str(), valux, &result);
 //    if (!check) {
-    result = smart_calc(x_calc, (char*)ui->result_show->text().toStdString().c_str(), result);
+    result = smart_calc(x_calc, (char*)ui->result_show->text().toStdString().c_str(), &result);
     output = QString::number(result, 'g', 8);
     ui->result_show->setText(output);
 //    } else {
@@ -105,9 +105,9 @@ void MainWindow::on_pushButton_build_graph_clicked()
     countN = (xEnd - xBegin)/h + 2;
 
     for(tempX = xBegin; tempX <= xEnd; tempX += h) {
-        smart_calc(x_calc, (char*)ui->result_show->text().toStdString().c_str(), &y);
+        smart_calc(x_calc, (char*)ui->result_show->text().toStdString().c_str(), &Y);
         x.push_back(tempX);
-        y.push_back(tempX*tempX);
+        y.push_back(Y);
     }
     ui->graph->addGraph();
     ui->graph->graph(0)->addData(x,y);
