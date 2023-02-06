@@ -57,3 +57,10 @@ int GetLastPriority(stack **source);
 void pull_to_bracket(stack **source, stack **dest);
 char stack_to_array(stack *source, char *output);
 double peek_dbl(stack *head, int pos);
+
+/*CREDIT CALCULATOR*/
+
+void total_pay(double *mpayment, int const *mounth, double *total_pay);
+void make_str(double rate, int mounth, double credit_sum, char **in);
+double credit_calc(double rate, int mounth, double credit_sum, double *mpayment, double *total_payment, double *pay_rates);
+void overpay(double total_payment, double credit_sum, double *pay_rates);

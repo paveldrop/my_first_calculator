@@ -31,18 +31,18 @@ START_TEST(calculate_01_1) {
 }
 END_TEST
 
-// START_TEST(calculate_01_2) {
-//   char str[] = "1 +2 * 4   +1 ";
-//   double result_num = 12, test_num = 0;
-//   stack *input = NULL;
-//   stack *ready = NULL;
-//   validator(str);
-//   parser(str, &input);
-//   rpn(&input, &ready);
-//   test_num = calculate(&ready);
-//   ck_assert_double_eq(test_num, result_num);
-// }
-// END_TEST
+START_TEST(calculate_01_2) {
+  char str[] = "(20000*0.01)/(1-(1+0.01)^(-12)";
+  double result_num = 1776.97, test_num = 0, x = 0;
+  stack *input = NULL;
+  stack *ready = NULL;
+  validator(str);
+  parser(str, &input);
+  rpn(&input, &ready, x);
+  test_num = calculate(&ready);
+  ck_assert_ldouble_eq_tol(test_num, result_num, 1e-2);
+}
+END_TEST
 
 // START_TEST(calculate_02) {
 //   char str[] = "-7+8";
@@ -345,6 +345,19 @@ END_TEST
 // }
 // END_TEST
 
+START_TEST(credit_03) {
+  double credit_sum = 200000;
+  double rate = 0.1;
+  int mounth = 24;
+  // char type = 'a';
+  double payment = 0, overpayment = 0, total_payments = 0;
+  credit_calc(rate, mounth, credit_sum, &payment, &total_payments, &overpayment);
+  ck_assert_double_eq_tol(9228.99, credit_sum, EPS);
+    ck_assert_double_eq(21495.7, credit_sum);
+    ck_assert_double_eq_tol(221495.65, credit_sum, EPS);
+}
+END_TEST
+
 Suite *count_test(void) {
   Suite *s;
   TCase *tc_core;
@@ -354,7 +367,7 @@ Suite *count_test(void) {
 
   tcase_add_test(tc_core, calculate_01);
   tcase_add_test(tc_core, calculate_01_1);
-  // tcase_add_test(tc_core, calculate_01_2);
+  tcase_add_test(tc_core, calculate_01_2);
   // tcase_add_test(tc_core, calculate_02);
   // tcase_add_test(tc_core, calculate_03);
   // tcase_add_test(tc_core, calculate_04);
@@ -383,20 +396,21 @@ Suite *count_test(void) {
   return s;
 }
 
-// Suite *credit_test(void) {
-//   Suite *s;
-//   TCase *tc_core;
+Suite *credit_test(void) {
+  Suite *s;
+  TCase *tc_core;
 
-//   s = suite_create("credit_test");
-//   tc_core = tcase_create("credit_test");
+  s = suite_create("credit_test");
+  tc_core = tcase_create("credit_test");
 
 //   tcase_add_test(tc_core, credit_01);
 //   tcase_add_test(tc_core, credit_02);
+  // tcase_add_test(tc_core, credit_03);
 
-//   suite_add_tcase(s, tc_core);
+  suite_add_tcase(s, tc_core);
 
-//   return s;
-// }
+  return s;
+}
 
 int main(void) {
   int no_failed = 0;
@@ -409,11 +423,11 @@ int main(void) {
   no_failed += srunner_ntests_failed(runner);
   srunner_free(runner);
 
-  // s = credit_test();
-  // runner = srunner_create(s);
-  // srunner_run_all(runner, CK_NORMAL);
-  // no_failed += srunner_ntests_failed(runner);
-  // srunner_free(runner);
+  s = credit_test();
+  runner = srunner_create(s);
+  srunner_run_all(runner, CK_NORMAL);
+  no_failed += srunner_ntests_failed(runner);
+  srunner_free(runner);
 
   return (no_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
 }

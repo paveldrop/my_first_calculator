@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -18,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_8,SIGNAL(clicked()),this,SLOT(digits_numbers()));
     connect(ui->pushButton_9,SIGNAL(clicked()),this,SLOT(digits_numbers()));
     connect(ui->pushButton_dot,SIGNAL(clicked()),this,SLOT(digits_numbers()));
-    connect(ui->pushButton_AC,SIGNAL(clicked()),this,SLOT(digits_numbers()));
+//    connect(ui->pushButton_AC,SIGNAL(clicked()),this,SLOT(digits_numbers()));
 //    connect(ui->pushButton_enter,SIGNAL(clicked()),this,SLOT(digits_numbers()));
     connect(ui->pushButton_mod,SIGNAL(clicked()),this,SLOT(digits_numbers()));
     connect(ui->pushButton_asin,SIGNAL(clicked()),this,SLOT(digits_numbers()));
@@ -38,6 +39,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_log,SIGNAL(clicked()),this,SLOT(digits_numbers()));
     connect(ui->pushButton_pow,SIGNAL(clicked()),this,SLOT(digits_numbers()));
     connect(ui->result_show,SIGNAL(returnPressed()),this,SLOT(on_pushButton_enter_clicked()));
+    connect(ui->spinBoxXmin,SIGNAL(valueChanged(int)),this,SLOT(on_pushButton_build_graph_clicked()));
+    connect(ui->spinBoxXmin_2,SIGNAL(valueChanged(int)),this,SLOT(on_pushButton_build_graph_clicked()));
+    connect(ui->spinBoxXmax,SIGNAL(valueChanged(int)),this,SLOT(on_pushButton_build_graph_clicked()));
+    connect(ui->spinBoxYmax,SIGNAL(valueChanged(int)),this,SLOT(on_pushButton_build_graph_clicked()));
 
  }
 
@@ -89,30 +94,33 @@ void MainWindow::on_pushButton_build_graph_clicked()
 {
     ui->graph->clearGraphs();
 
-    QString x_num = ui->x_data->text();
-    x_calc = x_num.toDouble();
+//    QString x_num = ui->x_data->text();
+//    x_calc = x_num.toDouble();
+
+    double yBegin, yEnd;
 
     h = 0.1;
+
     xBegin = ui->spinBoxXmin->value();
     xEnd = ui->spinBoxXmax->value();
-    yB = ui->spinBoxXmin_2->value();
-    yE = ui->spinBoxYmax->value();
+    yBegin = ui->spinBoxXmin_2->value();
+    yEnd =ui->spinBoxYmax->value();
 
     ui->graph->xAxis->setRange(xBegin, xEnd);
-    ui->graph->yAxis->setRange(yB, yE);
+    ui->graph->yAxis->setRange(yBegin, yEnd);
 
-    tempX = xBegin;
     countN = (xEnd - xBegin)/h + 2;
 
-    for(tempX = xBegin; tempX <= xEnd; tempX += h) {
-        smart_calc(x_calc, (char*)ui->result_show->text().toStdString().c_str(), &Y);
-        x.push_back(tempX);
+    for(X = xBegin; X <= xEnd; X += h) {
+        smart_calc(X, (char*)ui->result_show->text().toStdString().c_str(), &Y);
+        x.push_back(X);
         y.push_back(Y);
     }
     ui->graph->addGraph();
     ui->graph->graph(0)->addData(x,y);
     ui->graph->replot();
-
+    x.clear();
+    y.clear();
 }
 
 
@@ -126,5 +134,18 @@ void MainWindow::on_x_data_editingFinished()
 {
 
 
+}
+
+
+void MainWindow::on_spinBoxXmin_valueChanged(int arg1)
+{
+//    on_pushButton_AC_clicked();
+}
+
+
+void MainWindow::on_About_clicked()
+{
+    about = new about_wind(this);
+    about->show();
 }
 

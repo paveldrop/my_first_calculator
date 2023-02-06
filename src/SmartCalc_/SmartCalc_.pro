@@ -11,6 +11,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    about_wind.cpp \
     main.cpp \
     mainwindow.cpp \
     qcustomplot.cpp \
@@ -22,11 +23,13 @@ SOURCES += \
     ../calc.c
 
 HEADERS += \
+    about_wind.h \
     mainwindow.h \
     qcustomplot.h \
     ../smartcalc.h
 
 FORMS += \
+    about_wind.ui \
     mainwindow.ui
 
 # Default rules for deployment.
