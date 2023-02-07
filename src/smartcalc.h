@@ -64,3 +64,10 @@ void total_pay(double *mpayment, int const *mounth, double *total_pay);
 void make_str(double rate, int mounth, double credit_sum, char **in);
 double credit_calc(double rate, int mounth, double credit_sum, double *mpayment, double *total_payment, double *pay_rates);
 void overpay(double total_payment, double credit_sum, double *pay_rates);
+
+void *str_for_general_pay(int mounth, double credit_sum, char **general);
+double *calc_diff_credit(double rate, int mounth, double credit_sum, double *mpayment, double *total_payment, double *pay_rates);
+void *str_for_pay_rates(double rate, double credit_sum, char **rates_pay);
+void calculate_diff(char *general, char *rates, double *pay_rates, double *general_pay);
+void calculate_min_and_max(double rate, double credit_sum,double general_payment, double rates_to_pay, int mounth, double max_payment);
+void deleteListforreuse(stack **head);

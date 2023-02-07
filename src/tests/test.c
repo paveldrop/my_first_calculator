@@ -44,32 +44,32 @@ START_TEST(calculate_01_2) {
 }
 END_TEST
 
-// START_TEST(calculate_02) {
-//   char str[] = "-7+8";
-//   double result_num = 1, test_num = 0;
-//   stack *input = NULL;
-//   stack *ready = NULL;
-//   validator(str);
-//   parser(str, &input);
-//   // reverse(&input);
-//   rpn(&input, &ready);
-//   test_num = calculate(&ready);
-//   ck_assert_double_eq(test_num, result_num);
-// }
-// END_TEST
+START_TEST(calculate_02) {
+  char str[] = "-7+8";
+  double result_num = 1, test_num = 0, x = 0;
+  stack *input = NULL;
+  stack *ready = NULL;
+  validator(str);
+  parser(str, &input);
+  // reverse(&input);
+  rpn(&input, &ready, x);
+  test_num = calculate(&ready);
+  ck_assert_double_eq(test_num, result_num);
+}
+END_TEST
 
-// START_TEST(calculate_03) {
-//   char str[] = "99*(-10)+21";
-//   double result_num = -969, test_num = 0;
-//   stack *input = NULL;
-//   stack *ready = NULL;
-//   validator(str);
-//   parser(str, &input);
-//   rpn(&input, &ready);
-//   test_num = calculate(&ready);
-//   ck_assert_double_eq(test_num, result_num);
-// }
-// END_TEST
+START_TEST(calculate_03) {
+  char str[] = "99*(-10)+21";
+  double result_num = -969, test_num = 0, x = 0;
+  stack *input = NULL;
+  stack *ready = NULL;
+  validator(str);
+  parser(str, &input);
+  rpn(&input, &ready, x);
+  test_num = calculate(&ready);
+  ck_assert_double_eq(test_num, result_num);
+}
+END_TEST
 
 // START_TEST(calculate_04) {
 //   char str[] = "sin(3)";
@@ -84,18 +84,31 @@ END_TEST
 // }
 // END_TEST
 
-// START_TEST(calculate_05) {
-//   char str[] = "2+3+(3*4)+(5.1+6.7)";
-//   double result_num = 28.8, test_num, x = 0;
-//   stack *input = NULL;
-//   stack *ready = NULL;
-//   validator(str);
-//   parser(str, &input);
-//   rpn(&input, &ready);
-//   test_num = calculate(&ready);
-//   ck_assert_double_eq(test_num, result_num);
-// }
-// END_TEST
+START_TEST(calculate_04) {
+  char str[] = "20000*(0.1+(0.1/(1+0.1)*24-1)";
+  double result_num = 0.1411200, test_num = 0, x = 0;
+  stack *input = NULL;
+  stack *ready = NULL;
+  validator(str);
+  parser(str, &input);
+  rpn(&input, &ready, x);
+  test_num = calculate(&ready);
+  ck_assert_ldouble_eq_tol(test_num, result_num, 1e-8);
+}
+END_TEST
+
+START_TEST(calculate_05) {
+  char str[] = "(120000*0.15*30)/365";
+  double result_num = 1479.45, test_num, x = 0;
+  stack *input = NULL;
+  stack *ready = NULL;
+  validator(str);
+  parser(str, &input);
+  rpn(&input, &ready, x);
+  test_num = calculate(&ready);
+  ck_assert_double_eq(test_num, result_num);
+}
+END_TEST
 
 // START_TEST(calculate_06) {
 //   char str[] = "11.0+12.0*13.0";
@@ -331,30 +344,29 @@ END_TEST
 // }
 // END_TEST
 
-// START_TEST(credit_02) {
-//   double amount = 200000;
-//   double rate = 0.1;
-//   int term = 24;
-//   char type = 'a';
-//   double payment = 0, overpayment = 0, total_payments = 0;
-//   credit_calc(amount, term, rate, type, &payment, &overpayment,
-//               &total_payments);
-//   ck_assert_double_eq_tol(9228.99, payment, EPS);
-//     ck_assert_double_eq(21495.7, overpayment);
-//     ck_assert_double_eq_tol(221495.65, total_payments, EPS);
-// }
-// END_TEST
-
-START_TEST(credit_03) {
+START_TEST(credit_02) {
   double credit_sum = 200000;
-  double rate = 0.1;
+  double rate = 10;
   int mounth = 24;
   // char type = 'a';
   double payment = 0, overpayment = 0, total_payments = 0;
   credit_calc(rate, mounth, credit_sum, &payment, &total_payments, &overpayment);
-  ck_assert_double_eq_tol(9228.99, credit_sum, EPS);
-    ck_assert_double_eq(21495.7, credit_sum);
-    ck_assert_double_eq_tol(221495.65, credit_sum, EPS);
+  ck_assert_double_eq_tol(9228.99, payment, EPS);
+    ck_assert_double_eq(21495.7, overpayment);
+    ck_assert_double_eq_tol(221495.65, total_payments, EPS);
+}
+END_TEST
+
+START_TEST(credit_03) {
+  double credit_sum = 200000;
+  double rate = 6;
+  int mounth = 24;
+  // char type = 'a';
+  double payment = 0, overpayment = 0, total_payments = 0;
+  credit_calc(rate, mounth, credit_sum, &payment, &total_payments, &overpayment);
+  ck_assert_double_eq_tol(8864.12, payment, 1e-1);
+  ck_assert_double_eq_tol(212738.87, total_payments, 1e-1);
+  ck_assert_double_eq_tol(12738.91, overpayment, 1e-1);
 }
 END_TEST
 
@@ -368,10 +380,10 @@ Suite *count_test(void) {
   tcase_add_test(tc_core, calculate_01);
   tcase_add_test(tc_core, calculate_01_1);
   tcase_add_test(tc_core, calculate_01_2);
-  // tcase_add_test(tc_core, calculate_02);
-  // tcase_add_test(tc_core, calculate_03);
-  // tcase_add_test(tc_core, calculate_04);
-  // tcase_add_test(tc_core, calculate_05);
+  tcase_add_test(tc_core, calculate_02);
+  tcase_add_test(tc_core, calculate_03);
+  tcase_add_test(tc_core, calculate_04);
+  tcase_add_test(tc_core, calculate_05);
   // tcase_add_test(tc_core, calculate_06);
   // tcase_add_test(tc_core, calculate_07);
   // tcase_add_test(tc_core, calculate_08);
@@ -404,7 +416,7 @@ Suite *credit_test(void) {
   tc_core = tcase_create("credit_test");
 
 //   tcase_add_test(tc_core, credit_01);
-//   tcase_add_test(tc_core, credit_02);
+  // tcase_add_test(tc_core, credit_02);
   // tcase_add_test(tc_core, credit_03);
 
   suite_add_tcase(s, tc_core);

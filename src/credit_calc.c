@@ -6,10 +6,10 @@ void make_str(double rate, int mounth, double credit_sum, char **in) {
     char *credit_buf = {0};
     double rate_for_expr = rate/(100*12); 
     size_t length = 0;
-    length = (size_t)snprintf(NULL, 0, "(%.3f*%.3f)/(1-(1+%.3f)^(-%d)",
+    length = (size_t)snprintf(NULL, 0, "%.2f*(%.4f/(1-(1+%.4f)^(-%d))",
                 credit_sum, rate_for_expr, rate_for_expr, mounth) + 1;
     credit_buf = malloc(length);
-    snprintf(credit_buf, length, "(%.3f*%.3f)/(1-(1+%.3f)^(-%d)",
+    snprintf(credit_buf, length, "%.2f*(%.4f/(1-(1+%.4f)^(-%d))",     // %.2f*(%.2f+(%.2f/(1+%.2f)*%d-1))
                 credit_sum, rate_for_expr, rate_for_expr, mounth);
     *in = credit_buf;
 }
@@ -25,10 +25,10 @@ double credit_calc(double rate, int mounth, double credit_sum, double *mpayment,
     *mpayment = calculate(&ready);
     total_pay(mpayment, &mounth, total_payment);
     overpay(*total_payment, credit_sum, pay_rates);
-    // printf("\n\n%s", credit);
-    // printf("\n\n%lf", *mpayment);
-    // printf("\n\n%lf", *total_payment);
-    // printf("\n\n%lf", *pay_rates);
+    printf("\n\n%s", credit);
+    printf("\n\n%lf", *mpayment);
+    printf("\n\n%lf", *total_payment);
+    printf("\n\n%lf", *pay_rates);
     free(credit);
     deleteList(&input);
     return 0;
@@ -61,12 +61,12 @@ void overpay(double total_payment, double credit_sum, double *pay_rates) {
 
 
 
-int main() {
-  double credit_sum = 1000000;
-  double rate = 12;
-  int mounth = 24;
-  // char type = 'a';
-  double payment = 0, overpayment = 0, total_payments = 0;
-  credit_calc(rate, mounth, credit_sum, &payment, &total_payments, &overpayment);
-  return 0;
-}
+// int main() {
+//   double credit_sum = 200000;
+//   double rate = 6;
+//   int mounth = 24;
+//   // char type = 'a';
+//   double payment = 0, overpayment = 0, total_payments = 0;
+//   credit_calc(rate, mounth, credit_sum, &payment, &total_payments, &overpayment);
+//   return 0;
+// }

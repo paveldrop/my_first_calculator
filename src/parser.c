@@ -8,7 +8,7 @@ void parser(char *input_expression, stack **head) {
     int len_expr_str = strlen(p);
     for (int i = 0; i <= len_expr_str; i++) {
         printf("\n %d - проход\nsymbol - %c\nplace %s", i, p[i], &p[i]);
-        if ((p[i] >= '0' && p[i] <= '9') || p[i+1] == '.') {
+        if ((p[i] >= '0' && p[i] <= '9') || (i+1 <= len_expr_str && p[i+1] == '.')) {
             chislo = strtod((p + i), NULL);
             printf("\n double number - %f", chislo);
             pushback(chislo, 0, 0, head);
