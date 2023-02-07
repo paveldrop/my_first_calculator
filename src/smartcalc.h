@@ -17,6 +17,18 @@ typedef enum {number = 0, x = 1, plus = 2, minus = 3, bracket_open = 4,
 // -ln(9)+atan(9)-2*tan(9)
 // cos(9+2)-1
 // 99*(-10)+21
+
+typedef struct credit{
+    double amount;
+    double rate;
+    int mounth;
+    double max_tax;
+    double min_tax;
+    double total;
+    double overpay;
+    double general_pay;
+    double rates_to_pay;
+} credit;
 typedef struct stack{
     double value;
     int priority;
@@ -66,7 +78,7 @@ double credit_calc(double rate, int mounth, double credit_sum, double *mpayment,
 void overpay(double total_payment, double credit_sum, double *pay_rates);
 
 void *str_for_general_pay(int mounth, double credit_sum, char **general);
-double *calc_diff_credit(double rate, int mounth, double credit_sum, double *mpayment, double *total_payment, double *pay_rates);
+credit *calc_diff_credit(credit *x);
 void *str_for_pay_rates(double rate, double credit_sum, char **rates_pay);
 void calculate_diff(char *general, char *rates, double *pay_rates, double *general_pay);
 void calculate_min_and_max(double rate, double credit_sum,double general_payment, double rates_to_pay, int mounth, double max_payment);

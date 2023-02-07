@@ -40,16 +40,13 @@ int validator(char *input_expression) {
                 }
             }
         }
-        printf("\ncount = !!!!!!!!!!!!!!!");
         if (count == strlen(wo_spaces_exp)) {
             err = 0;
-            // printf("\nProverka na simvoly done count = %d symbol in input = %ld", count, strlen(wo_spaces_exp));
         }
         if (count_bracket % 2 == 1) {
             err = -3;  // недостаточно скобок
         }
     }
-    // printf("\ncount = !!!!!!!!!!!!!!! %u", count_bracket);
     printf("\ncount = !!!!!!!!!!!!!!! %d", err);
     return err;
 }
@@ -70,7 +67,7 @@ void *no_space(char *input) {
 
 int expr_is_null_or(char *input) {
     int a = 0;
-    if (input == NULL) {
+    if (input == NULL || !input[0]) {
         a = 129;
     } else {
         a = 1;
